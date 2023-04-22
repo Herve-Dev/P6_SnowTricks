@@ -10,8 +10,8 @@
     border: solid 1px black;
     font-size: 30px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /*justify-content: center;
+    align-items: center;*/
 }
 
 .bloc-1 {
@@ -20,6 +20,18 @@
 
 .bloc-2 {
     height: 100vh;
+}
+
+.chevron-down {
+    position: absolute;
+    top: 19em;
+    left: 46em;
+}
+
+.chevron-up {
+    position: absolute;
+    top: 41em;
+    left: 46em;
 }
 
 
