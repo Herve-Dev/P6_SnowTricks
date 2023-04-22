@@ -1,0 +1,25 @@
+.uk-navbar-right {
+    margin-right: 30px;
+}
+
+.container-main {
+    height: auto;
+}
+
+.v-slider-bloc {
+    border: solid 1px black;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bloc-1 {
+    height: 89vh;
+}
+
+.bloc-2 {
+    height: 100vh;
+}
+
+
