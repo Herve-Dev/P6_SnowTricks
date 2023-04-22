@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\CommentTricks;
+use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CommentTricks>
+ * @extends ServiceEntityRepository<Comment>
  *
- * @method CommentTricks|null find($id, $lockMode = null, $lockVersion = null)
- * @method CommentTricks|null findOneBy(array $criteria, array $orderBy = null)
- * @method CommentTricks[]    findAll()
- * @method CommentTricks[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comment[]    findAll()
+ * @method Comment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CommentTricksRepository extends ServiceEntityRepository
+class CommentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CommentTricks::class);
+        parent::__construct($registry, Comment::class);
     }
 
-    public function save(CommentTricks $entity, bool $flush = false): void
+    public function save(Comment $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CommentTricksRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(CommentTricks $entity, bool $flush = false): void
+    public function remove(Comment $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CommentTricksRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return CommentTricks[] Returns an array of CommentTricks objects
+//     * @return Comment[] Returns an array of Comment objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CommentTricksRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CommentTricks
+//    public function findOneBySomeField($value): ?Comment
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

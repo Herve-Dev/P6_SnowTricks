@@ -15,7 +15,7 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
@@ -27,16 +27,16 @@ class User
     #[ORM\Column(type:'datetime', options:['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $user_created_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Tricks::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: tricks::class)]
     private Collection $tricks;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CommentTricks::class)]
-    private Collection $commentTricks;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: comment::class)]
+    private Collection $comment;
 
     public function __construct()
     {
         $this->tricks = new ArrayCollection();
-        $this->commentTricks = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,14 +93,14 @@ class User
     }
 
     /**
-     * @return Collection<int, Tricks>
+     * @return Collection<int, tricks>
      */
     public function getTricks(): Collection
     {
         return $this->tricks;
     }
 
-    public function addTrick(Tricks $trick): self
+    public function addTrick(tricks $trick): self
     {
         if (!$this->tricks->contains($trick)) {
             $this->tricks->add($trick);
@@ -110,7 +110,7 @@ class User
         return $this;
     }
 
-    public function removeTrick(Tricks $trick): self
+    public function removeTrick(tricks $trick): self
     {
         if ($this->tricks->removeElement($trick)) {
             // set the owning side to null (unless already changed)
@@ -123,29 +123,29 @@ class User
     }
 
     /**
-     * @return Collection<int, CommentTricks>
+     * @return Collection<int, comment>
      */
-    public function getCommentTricks(): Collection
+    public function getComment(): Collection
     {
-        return $this->commentTricks;
+        return $this->comment;
     }
 
-    public function addCommentTrick(CommentTricks $commentTrick): self
+    public function addComment(comment $comment): self
     {
-        if (!$this->commentTricks->contains($commentTrick)) {
-            $this->commentTricks->add($commentTrick);
-            $commentTrick->setUser($this);
+        if (!$this->comment->contains($comment)) {
+            $this->comment->add($comment);
+            $comment->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCommentTrick(CommentTricks $commentTrick): self
+    public function removeComment(comment $comment): self
     {
-        if ($this->commentTricks->removeElement($commentTrick)) {
+        if ($this->comment->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($commentTrick->getUser() === $this) {
-                $commentTrick->setUser(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 

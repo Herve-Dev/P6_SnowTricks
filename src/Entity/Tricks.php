@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TricksRepository;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,7 +16,7 @@ class Tricks
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 150, unique: true)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $tricks_name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -27,14 +26,23 @@ class Tricks
     private ?\DateTimeImmutable $tricks_created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'tricks')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: CommentTricks::class)]
-    private Collection $commentTricks;
+    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: MediaTricks::class, orphanRemoval: true)]
+    private Collection $MediaTricks;
+
+    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comment;
+
+    #[ORM\ManyToOne(inversedBy: 'tricks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function __construct()
     {
-        $this->commentTricks = new ArrayCollection();
+        $this->MediaTricks = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,31 +99,73 @@ class Tricks
     }
 
     /**
-     * @return Collection<int, CommentTricks>
+     * @return Collection<int, MediaTricks>
      */
-    public function getCommentTricks(): Collection
+    public function getMediaTricks(): Collection
     {
-        return $this->commentTricks;
+        return $this->MediaTricks;
     }
 
-    public function addCommentTrick(CommentTricks $commentTrick): self
+    public function addMediaTrick(MediaTricks $mediaTrick): self
     {
-        if (!$this->commentTricks->contains($commentTrick)) {
-            $this->commentTricks->add($commentTrick);
-            $commentTrick->setTricks($this);
+        if (!$this->MediaTricks->contains($mediaTrick)) {
+            $this->MediaTricks->add($mediaTrick);
+            $mediaTrick->setTricks($this);
         }
 
         return $this;
     }
 
-    public function removeCommentTrick(CommentTricks $commentTrick): self
+    public function removeMediaTrick(MediaTricks $mediaTrick): self
     {
-        if ($this->commentTricks->removeElement($commentTrick)) {
+        if ($this->MediaTricks->removeElement($mediaTrick)) {
             // set the owning side to null (unless already changed)
-            if ($commentTrick->getTricks() === $this) {
-                $commentTrick->setTricks(null);
+            if ($mediaTrick->getTricks() === $this) {
+                $mediaTrick->setTricks(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment->add($comment);
+            $comment->setTricks($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comment->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getTricks() === $this) {
+                $comment->setTricks(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
