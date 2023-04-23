@@ -1,0 +1,65 @@
+/********* Responsive for mobile **********/
+@media screen and (max-width: 1083px) {
+    #video-desktop {
+      display: none;
+    }
+    #video-mobile {
+        display: flex;
+    }
+}
+
+/********* Responsive for desktop **********/
+@media screen and (min-width: 1083px) {
+    #video-desktop {
+      display: flex;
+      min-height:auto;
+    }
+    #video-mobile {
+        display: none;
+    }
+}
+
+/********* Responsive for desktop **********/
+@media screen and (max-width: 1270px) and (min-width: 1083px) {
+    #video-desktop {
+      display: flex;
+      top: 0;
+      min-width: 200%;
+      right: 50%;
+    }
+    
+    #video-mobile {
+        display: none;
+    }
+}
+
+/********* Responsive for desktop **********/
+@media screen and (max-width: 1930px) and (min-width: 1270px) {
+  #video-desktop {
+    top: 0;
+    min-width: 200%;
+    right: 60%;
+    top: -500px;
+  }
+  
+  #video-mobile {
+      display: none;
+  }
+
+  .chevron-down {
+    top: 30em;
+    bottom: 200px;
+  }
+}
+
+/********* Responsive for mobile **********/
+@media screen and (max-width: 620px) {
+  #video-desktop {
+    display: none;
+  }
+  #video-mobile {
+      display: flex;
+      min-width: 150%;
+  }
+}
+

@@ -5,12 +5,29 @@
 {% block body %}
     <div class="container-main">
         <div class="v-slider-bloc bloc-1">
-            <h1>Bloc 1</h1>
-            <a href="#main-down" class="chevron-down chevron" uk-scroll uk-icon="icon: chevron-down; ratio: 3"></a>
+            <div class="chevron-down chevron">
+                <a href="#main-down" class="link" uk-scroll uk-icon="icon: chevron-down; ratio: 3"></a>
+            </div>
+
+            <div id="bloc-main-video">
+                <video id="video-desktop" loop muted autoplay>
+                    <source src="{{ asset('video/video-snowtricks.mp4')}}" type="video/mp4">
+                </video>
+                <video id="video-mobile" loop muted autoplay>
+                    <source src="{{ asset('video/video-snowtricks-responsive.mp4')}}" type="video/mp4">
+                </video>
+            </div>
+
+            <div id="catch-phrase" >
+                <h2 class="uk-heading-xlarge">Découvrez les astuces des pros et partagez</h2>
+                <h2 class="uk-heading-large">les vôtres avec notre communauté !!</h2>
+            </div>
         </div>
         <div class="v-slider-bloc bloc-2" id="main-down">
             <h1>Bloc 2</h1>
-            <a href="#main-top" class="chevron-up chevron" uk-scroll uk-scroll uk-icon="icon: chevron-up; ratio: 3"></a>
+            <div class="chevron-up chevron">
+                <a href="#main-top" uk-scroll uk-scroll uk-icon="icon: chevron-up; ratio: 3"></a>
+            </div>
         </div>
     </div>
 {% endblock %}

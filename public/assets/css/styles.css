@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500&display=swap');
+
+body {
+    position: absolute;
+    width: 100%;
+}
 .uk-navbar-right {
     margin-right: 30px;
 }
 
+li {
+    font-weight: 500;
+}
+
 .container-main {
     height: auto;
+    border: 4px blue solid;
 }
 
 .v-slider-bloc {
@@ -15,23 +26,88 @@
 }
 
 .bloc-1 {
-    height: 89vh;
+    height: 100vh;
+    border: solid yellow 2px;
+    overflow: hidden;
 }
 
 .bloc-2 {
     height: 100vh;
 }
 
+.chevron {
+    background: rgba( 0, 0, 0, 0.3 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11px );
+    -webkit-backdrop-filter: blur( 11px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
 .chevron-down {
     position: absolute;
-    top: 19em;
-    left: 46em;
+    z-index: 5;
+    border-radius: 50%;
+    top: 30em;
+    left: 90%;
+    cursor: pointer;
+}
+
+.uk-icon[uk-icon="icon: chevron-down"]{
+    color: white;
 }
 
 .chevron-up {
     position: absolute;
-    top: 41em;
-    left: 46em;
+    top: 62em;
+    left: 90%;
+    border-radius: 50%;
+    cursor: pointer;
 }
+
+#bloc-main-video {
+    overflow: hidden;
+}
+
+#video-desktop {
+    min-width: 100%;
+    position: relative;
+    z-index: -10;
+}
+
+#video-mobile {
+    min-width: 100%;
+    min-height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+#catch-phrase {
+    border: solid 2px yellow;
+    position: absolute;
+    z-index: 100;
+    top: 15%;
+    left: 15px; 
+}
+
+#catch-phrase h2 {
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+
+nav {
+    z-index: 10;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.17);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0.9px);
+    -webkit-backdrop-filter: blur(0.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+
 
 
