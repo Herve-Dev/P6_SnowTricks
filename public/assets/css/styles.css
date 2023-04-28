@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100;200;300;400;500;600;700;800;900;1000&display=swap');
 
 body {
     position: absolute;
@@ -14,7 +15,6 @@ li {
 
 .container-main {
     height: auto;
-    border: 4px blue solid;
 }
 
 .v-slider-bloc {
@@ -26,26 +26,33 @@ li {
 }
 
 .bloc-1 {
+    position: relative;
     height: 100vh;
-    border: solid yellow 2px;
     overflow: hidden;
 }
 
 .bloc-2 {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .chevron {
-    background: rgba( 0, 0, 0, 0.3 );
+    background: rgba( 74, 144, 226, 0.65 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 11px );
     -webkit-backdrop-filter: blur( 11px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 50px;
+    height: 50px;
+    margin-right: 10px ;
 }
 
 .chevron-down {
-    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     z-index: 5;
     border-radius: 50%;
     top: 30em;
@@ -53,13 +60,9 @@ li {
     cursor: pointer;
 }
 
-.uk-icon[uk-icon="icon: chevron-down"]{
-    color: white;
-}
-
 .chevron-up {
-    position: absolute;
-    top: 62em;
+    /*position: absolute;*/
+    top: 65em;
     left: 90%;
     border-radius: 50%;
     cursor: pointer;
@@ -70,44 +73,119 @@ li {
 }
 
 #video-desktop {
-    min-width: 100%;
-    position: relative;
+    display: flex;
+    /*min-width: 100%;*/
+    position: absolute;
     z-index: -10;
 }
 
-#video-mobile {
-    min-width: 100%;
-    min-height: 100%;
-    position: relative;
+.main-img-mobile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -10;
+}
+
+.bloc-item-main-1 {
     width: 100%;
 }
 
-#catch-phrase {
-    border: solid 2px yellow;
-    position: absolute;
-    z-index: 100;
-    top: 15%;
-    left: 15px; 
+.bloc-item-main-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px blue;
+    width: 100%;
+    height: 90vh;
 }
 
-#catch-phrase h2 {
+.bloc-chevron {
+    display: flex;
+    justify-content: flex-end;
+    height: 10vh;
+}
+
+#bloc-tagline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+}
+
+#bloc-tagline p {
+    margin-left: 25px;
+}
+
+
+#tagline {
+    border: 2px yellow solid;
+    background: rgba( 74, 144, 226, 0.65 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 20px;
+    width: 70%;
+    margin-left: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tagline h2 {
+    margin: 5px;
+    font-family: 'Roboto Flex', sans-serif;
     color: white;
-    font-family: 'Heebo', sans-serif;
-    font-weight: 500;
-    margin: 0;
 }
 
 nav {
     z-index: 10;
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.17);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(0.9px);
-    -webkit-backdrop-filter: blur(0.9px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba( 255, 255, 255, 0 );
+    backdrop-filter: blur( 1px );
+    -webkit-backdrop-filter: blur( 1px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
+.link-nav {
+    color: white;
+}
 
+.link-tricks {
+    color: white;
+}
+
+.container-tricks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border: solid 2px green;
+    width: 90%;
+    height: 90%;
+}
+
+.card-tricks {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px purple;
+    width: 250px;
+    height: 200px;
+}
+
+.card-tricks-body {
+    border: solid 2px blue;
+    width: 100%;
+    height: 70%;
+}
+
+.card-tricks-footer {
+    border: solid 2px red;
+    width: 100%;
+    height: 30%;
+}
 
 
 

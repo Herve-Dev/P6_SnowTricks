@@ -3,10 +3,20 @@
     #video-desktop {
       display: none;
     }
-    #video-mobile {
+    .main-img-mobile {
         display: flex;
     }
+
+    #bloc-tagline {
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tagline {
+      width: 80%;
+    }
 }
+
 
 /********* Responsive for desktop **********/
 @media screen and (min-width: 1083px) {
@@ -14,9 +24,9 @@
       display: flex;
       min-height:auto;
     }
-    #video-mobile {
+    /*.main-img-mobile {
         display: none;
-    }
+    }*/
 }
 
 /********* Responsive for desktop **********/
@@ -24,11 +34,11 @@
     #video-desktop {
       display: flex;
       top: 0;
-      min-width: 200%;
-      right: 50%;
+      min-width: 180%;
+      left: -500px;
     }
     
-    #video-mobile {
+    .main-img-mobile {
         display: none;
     }
 }
@@ -36,30 +46,22 @@
 /********* Responsive for desktop **********/
 @media screen and (max-width: 1930px) and (min-width: 1270px) {
   #video-desktop {
-    top: 0;
-    min-width: 200%;
-    right: 60%;
-    top: -500px;
+    min-width: 150%;
   }
   
-  #video-mobile {
+  .main-img-mobile {
       display: none;
   }
-
-  .chevron-down {
-    top: 30em;
-    bottom: 200px;
-  }
 }
-
-/********* Responsive for mobile **********/
-@media screen and (max-width: 620px) {
+/********* Responsive for desktop **********/
+@media screen and (max-width: 3440px) and (min-width: 1930px) {
   #video-desktop {
-    display: none;
+    min-width: 150%;
   }
-  #video-mobile {
-      display: flex;
-      min-width: 150%;
+  
+  .main-img-mobile {
+      display: none;
   }
 }
+
 
