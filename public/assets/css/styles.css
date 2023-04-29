@@ -4,6 +4,8 @@
 body {
     position: absolute;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .uk-navbar-right {
     margin-right: 30px;
@@ -187,5 +189,20 @@ nav {
     height: 30%;
 }
 
+.container-register-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 91vh;
+}
 
-
+.form-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 50%;
+    padding: 20px;
+    border: solid 3px blue;
+}

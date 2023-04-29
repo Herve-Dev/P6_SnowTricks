@@ -22,7 +22,7 @@ class Tricks
     #[ORM\Column(type: Types::TEXT)]
     private ?string $tricks_description = null;
 
-    #[ORM\Column(type:'datetime', options:['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type:'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $tricks_created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'Tricks')]
@@ -43,6 +43,7 @@ class Tricks
     {
         $this->MediaTricks = new ArrayCollection();
         $this->Comment = new ArrayCollection();
+        $this->tricks_created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

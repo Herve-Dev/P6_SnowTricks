@@ -1,0 +1,21 @@
+{% extends 'baseAuth.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container-register-login">
+        {{ form_start(registrationForm ,{'attr': {'class': 'form-auth'}}) }}
+            <h1>Inscription</h1>
+            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            <a href="{{ path('app_login') }}">Vous avez déja un compte ?</a>
+            <button type="submit" class="uk-button uk-button-primary">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+    </div>
+
+
+    
+{% endblock %}

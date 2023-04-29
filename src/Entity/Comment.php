@@ -16,7 +16,7 @@ class Comment
     #[ORM\Column(length: 255)]
     private ?string $comment_tricks = null;
 
-    #[ORM\Column(type:'datetime', options:['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type:'datetime_immutable', options:['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $comment_created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'Comment')]
