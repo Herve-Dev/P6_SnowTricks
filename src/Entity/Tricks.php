@@ -29,7 +29,7 @@ class Tricks
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: MediaTricks::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: MediaTricks::class, orphanRemoval: true, cascade:['persist'])]
     private Collection $MediaTricks;
 
     #[ORM\ManyToOne(inversedBy: 'Tricks')]
