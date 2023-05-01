@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\MediaTricks;
 use App\Entity\Tricks;
 use App\Form\TricksFormType;
+use App\Repository\TricksRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
 {
-    #[Route('/addNewTricks', name: 'add_new_tricks')]
-    public function index(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
+    #[Route('/', name: 'all_tricks')]
+    public function index(TricksRepository $tricksRepository): Response
     {
+        // On recupère toute les données pour l'injecter à la vue
+        //$tricks = $tricksRepository->findBy([], ['tricks_created_at' => 'DESC']);
+        $tricks = $tricksRepository->findByTricksWithMedia();
+        return $this->render('tricks/index.html.twig', compact('tricks'));
+    }
 
+    #[Route('/addTricks', name: 'add_new_tricks')]
+    public function addTricks(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
+    {
         //On crée un "nouveau tricks"
         $tricks = new Tricks();
 
@@ -50,7 +59,6 @@ class TricksController extends AbstractController
 
             }
 
-
             //On Stock en base de donnée
             $em->persist($tricks);
             $em->flush();
@@ -62,8 +70,17 @@ class TricksController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        return $this->render('tricks/index.html.twig', [
+        return $this->render('tricks/add.html.twig', [
             'tricksForm' => $tricksForm->createView()
         ]);
     }
+
+    #[Route('/updateTricks/{id}', name: 'update_tricks')]
+    public function updateTricks(Tricks $tricks): Response
+    {
+        return $this->render('tricks/update.html.twig', compact('tricks'));
+    }
+
+
+   
 }

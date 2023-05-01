@@ -1,17 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un nouveau tricks{% endblock %}
+{% block title %}Tricks{% endblock %}
 
 {% block body %}
-<h1>Ajouter un nouveau tricks</h1>
-{{ form_start(tricksForm) }}
-    {{ form_row(tricksForm.tricks_name) }}
-    {{ form_row(tricksForm.tricks_description) }}
-    {{ form_row(tricksForm.category) }}
-    {{ form_row(tricksForm.media_tricks) }}
-    <button class="uk-button uk-button-primary" type="submit">
-        Ajouter mon tricks
-    </button>
-{{ form_end(tricksForm) }}
-
+<h1>Tricks</h1>
+    
+    {% for trick in tricks %}
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title">{{trick.tricksName}}</h3>
+            <p>{{trick.tricksDescription}}</p>
+            <p>{{trick.tricksCreatedAt|date('d-m-Y H:i:s')}}</p>
+            {% for media in trick.MediaTricks %}
+            <div class="uk-card-media-top">
+                <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" 
+                alt="{{trick.tricksName}}">
+            </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
 {% endblock %}

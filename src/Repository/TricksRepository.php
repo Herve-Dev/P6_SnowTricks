@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\MediaTricks;
 use App\Entity\Tricks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,19 @@ class TricksRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Query custom return an array with media_tricks 
+     * @return array
+     */
+    public function findByTricksWithMedia(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->innerJoin(MediaTricks::class, 'm', 'WITH', 'm.tricks = t.id')
+            ->orderBy('t.tricks_created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

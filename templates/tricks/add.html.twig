@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouveau tricks{% endblock %}
+
+{% block body %}
+<h1>Ajouter un nouveau tricks</h1>
+{{ form_start(tricksForm) }}
+    {{ form_row(tricksForm.tricks_name) }}
+    {{ form_row(tricksForm.tricks_description) }}
+    {{ form_row(tricksForm.category) }}
+    {{ form_row(tricksForm.media_tricks) }}
+    <button class="uk-button uk-button-primary" type="submit">
+        Ajouter mon tricks
+    </button>
+{{ form_end(tricksForm) }}
+
+{% endblock %}
