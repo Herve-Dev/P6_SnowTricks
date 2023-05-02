@@ -35,106 +35,28 @@
         <div class="v-slider-bloc bloc-2" id="main-down">
             <div class="bloc-item-main-2">
                 <div class="container-tricks">
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
+                    {% for trick in tricks %}
+                        <div class="card-tricks">
+                            <div class="card-tricks-body">
+                                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow>
+                                    <ul class="uk-slideshow-items">
+                                        {% for media in trick.MediaTricks %}
+                                            <li>
+                                                <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="" uk-cover>
+                                            </li>
+                                        {% endfor %}    
+                                    </ul>
+                                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                                </div>
+                            </div>
+                            <div class="card-tricks-footer">
+                                <a class="uk-button" href="#">{{trick.tricksName}}</a>
+                                <a href="{{path('tricks_update_tricks', {id: trick.id})}}" uk-icon="icon: pencil"></a>
+                                <a href="" uk-icon="icon: trash"></a>
+                            </div>
                         </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
-                    <div class="card-tricks">
-                        <div class="card-tricks-body">
-                            photo
-                        </div>
-                        <div class="card-tricks-footer">
-                            <a class="uk-button" href="#">tricks name</a>
-                            <a href="" uk-icon="icon: pencil"></a>
-                            <a href="" uk-icon="icon: trash"></a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="bloc-chevron uk-animation-slide-bottom-medium">

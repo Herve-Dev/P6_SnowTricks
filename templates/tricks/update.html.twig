@@ -1,11 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer un tricks{% endblock %}
+{% block title %}Modifier mon tricks{% endblock %}
 
 {% block body %}
-<h1>Editer un tricks</h1>
+    <h1>Modifier mon tricks</h1>
+    {{ form_start(tricksForm) }}
+        {{ form_row(tricksForm.tricks_name) }}
+        {{ form_row(tricksForm.tricks_description) }}
+        {{ form_row(tricksForm.category) }}
+        {{ form_row(tricksForm.media_tricks) }}
+        <ul class="bloc_update_image">
+            {% for media in tricks.mediaTricks %}
+                <li>
+                    <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="">
+                    <a href="{{ path('tricks_delete_image', {id: media.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ media.id) }}"> supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+            
+        <button class="uk-button uk-button-primary" type="submit">
+            Modifier mon tricks
+        </button>
+    {{ form_end(tricksForm) }}
 
 
+{% endblock %}
 
-
+{% block javascripts %}
+    <script src="{{ asset('assets/js/delete-picture.js') }}" defer></script>
 {% endblock %}

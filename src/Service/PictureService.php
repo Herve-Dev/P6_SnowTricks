@@ -90,7 +90,7 @@ class PictureService
     {
         if ($file !== 'default.webp') {
             $success = false;
-            $path = $this->params->get('images_directory') . $folder; 
+            $path = $this->params->get('image_directory') . $folder; 
 
             $mini = $path . '/mini/' . $width . 'x' . $height . '-' . $file;
 
