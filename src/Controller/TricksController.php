@@ -145,5 +145,28 @@ class TricksController extends AbstractController
         
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
+
+    #[Route('/deleteTricks/{id}', name: 'delete_tricks')]
+    public function deleteTricks(TricksRepository $tricksRepository,EntityManagerInterface $entityManager, int $id, PictureService $pictureService)
+    {
+
+        $tricks = $tricksRepository->find($id);
+        $mediaTricks = $tricks->getMediaTricks();
+        
+        foreach($mediaTricks as $media) {
+            // On boucle sur la collection getMediaTricks pour supprimer les photos du serveur
+            $pictureService->delete($media->getMediaName(), 'media_tricks', 300, 300);
+        }
+        
+        if (!$tricks) {
+            throw $this->createNotFoundException('Pas de tricks trouvé avec l\'id:'.$id);
+        }
+        
+        $entityManager->remove($tricks);
+        $entityManager->flush();
+    
+        return $this->render('main/index.html.twig');
+        
+    }
    
 }
