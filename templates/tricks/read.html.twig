@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{tricksSelected.TricksName}}{% endblock %}
+
+{% block body %} 
+
+    <div class="container-main">
+
+        <div class="v-slider-bloc bloc-1 read-bloc-1">
+            <div class="bloc-slideshow">
+                <div class="bloc-img">
+                    <div uk-slideshow="animation: push">
+                        <div  class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                            <ul class="uk-slideshow-items">
+                            {% for media in tricksSelected.MediaTricks %}
+                                <li>
+                                    <img src="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" alt="" uk-cover>
+                                </li>
+                            {% endfor %}    
+                                
+                            </ul>
+
+                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                        </div>
+                        <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bloc-desc">
+                <article class="uk-article">
+
+                    <h1 class="uk-article-title">
+                        <a class="uk-link-reset" href="">{{tricksSelected.TricksName}}</a>
+                    </h1>
+
+                    <p class="uk-article-meta">écrit par
+                        <a href="#">{{tricksSelected.User.Username}}</a>
+                        en date du : {{tricksSelected.TricksCreatedAt| date("d/m/y H:i:s") }}
+                        <a href="#">Snowtricks</a>
+                    </p>
+                    <p class="uk-text-lead">{{tricksSelected.TricksDescription}}</p>
+                </article>
+            </div>
+        </div>
+        
+        <div class="v-slider-bloc bloc-2">
+        </div>
+    
+    </div>
+
+{% endblock %}

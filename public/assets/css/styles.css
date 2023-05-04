@@ -222,3 +222,20 @@ nav {
     object-fit: contain;
 }
 
+.bloc-slideshow {
+    border: solid 3px red;
+    width: 60%;
+    height: 88vh;
+}
+
+.read-bloc-1 {
+    display: flex;
+    align-items: flex-end;
+    border: solid 2px purple;
+    width: 100%;
+}
+
+.bloc-desc {
+    width: 30%;
+    height: 88vh;
+}

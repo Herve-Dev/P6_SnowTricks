@@ -25,6 +25,14 @@ class TricksController extends AbstractController
         return $this->render('tricks/index.html.twig', compact('tricks'));
     }
 
+    #[Route('/readTricks/{id}', name: 'read_tricks')]
+    public function readTricks(TricksRepository $tricksRepository, int $id): Response
+    {
+        // On recupère toute le tricks selon son id pour l'injecter à la vue
+        $tricksSelected = $tricksRepository->findOneBy(['id' => $id]);
+        return $this->render('tricks/read.html.twig', compact('tricksSelected'));
+    }
+
     #[Route('/addTricks', name: 'add_new_tricks')]
     public function addTricks(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
