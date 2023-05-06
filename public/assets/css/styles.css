@@ -288,3 +288,11 @@ nav {
     height: 90%;
 }
 
+#mediaTricksContainer {
+    padding: 10px;
+    margin: 50px;
+}
+
+#addMediaButton {
+    margin: 20px;
+}
