@@ -9,6 +9,7 @@ use App\Repository\TricksRepository;
 use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,20 +35,21 @@ class TricksController extends AbstractController
     }
 
     #[Route('/add/picture', name: 'add_picture_tricks', methods: ['POST'])]
-    public function addPicture(Request $request, MediaTricks $mediaTrick, PictureService $pictureService): JsonResponse
+    public function addPicture(Request $request, PictureService $pictureService): JsonResponse
     {
         //On récupère le contenu de la requête
         $data = json_decode($request->getContent(), true);
 
         // On récupère le nom de l'image
-        /*$mediaName = $mediaTrick->setMediaName();
+        /*$mediaName = $mediaTrick->setMediaName();*/
 
+        
 
-        if ($pictureService->add($mediaName, 'media_tricks', 300, 300)) {
+        /*if ($pictureService->add($mediaName, 'media_tricks', 300, 300)) {
             // Si la requête est effectué on renvoie un code 200
 
             return new JsonResponse(['success' => true], 200);
-        }
+        }*/
 
         //La supréssion a échoué*/
         return new JsonResponse(['message' => $data], 200);
@@ -73,20 +75,22 @@ class TricksController extends AbstractController
         if ($tricksForm->isSubmitted() && $tricksForm->isValid()) {
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
-
+            dump($mediaTricks);
+            
+          
             foreach($mediaTricks as $mediaTrick) {
+                
                 //On définit le dossier de destination
                 $folder = "media_tricks";
-
+                
                 //On appelle le service d'ajout
                 $file = $pictureService->add($mediaTrick,$folder, 300, 300);
 
                 $mediaEntity = new MediaTricks();
                 $mediaEntity->setMediaName($file);
                 $tricks->addMediaTrick($mediaEntity);
-
             }
-
+           
             //On Stock en base de donnée
             $em->persist($tricks);
             $em->flush();
@@ -99,7 +103,7 @@ class TricksController extends AbstractController
         }
 
         return $this->render('tricks/add.html.twig', [
-            'tricksForm' => $tricksForm->createView()
+            'tricksForm' => $tricksForm->createView(), 
         ]);
     }
 
@@ -193,8 +197,7 @@ class TricksController extends AbstractController
         $entityManager->remove($tricks);
         $entityManager->flush();
     
-        return $this->render('main/index.html.twig');
-        
+        return $this->redirectToRoute('main'); 
     }
    
 }

@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\MediaTricks;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +17,12 @@ class MediaTricksType extends AbstractType
         $builder
             ->add('media_name', FileType::class, [
                 'label' => 'Media',
-                'mapped' => false,
-                'required' => false,
+                //'mapped' => true,
+                'required' => true
+            ])
+            ->add('delete', ButtonType::class, [
+                'label' => 'Supprimer',
+                'attr' => ['class' => 'delete-media'],
             ])
         ;
     }

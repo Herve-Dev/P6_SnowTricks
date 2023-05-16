@@ -35,13 +35,14 @@ class TricksFormType extends AbstractType
                 'mapped' => false,
             ])*/
             ->add('media_tricks', CollectionType::class, [
-                'entry_type' => MediaTricksType::class,
+                'entry_type' => FileType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
                 'prototype_name' => '__media_Tricks_index__',
                 'label' => false,
+                'mapped' => false
             ])
             ;
     }

@@ -8,10 +8,22 @@
     {{ form_row(tricksForm.tricks_name) }}
     {{ form_row(tricksForm.tricks_description) }}
     {{ form_row(tricksForm.category) }}
-    {#{{ form_row(tricksForm.media_tricks) }}#}
+    {#{{ form_row(tricksForm.media_tricks) }}#} 
 
-    <div id="mediaTricksContainer"></div>
-    <button type="button" data-index="{{ tricksForm.media_tricks|length }}" id="add-media-button">Ajouter un fichier</button>
+    
+    {#<div id="mediaTricksContainer"></div>
+    <button type="button" data-index="{{ tricksForm.media_tricks|length }}" id="add-media-button">Ajouter un fichier</button>#}
+
+    <div id="media-container" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
+    {% for mediaForm in tricksForm.media_tricks %}
+        <div class="media">
+            {{ form_row(mediaForm) }}
+        </div>
+    {% endfor %}
+    </div>
+
+    <button type="button" class="add-media">Ajouter un média</button>
+
     
     <button class="uk-button uk-button-primary" type="submit">
         Ajouter mon tricks

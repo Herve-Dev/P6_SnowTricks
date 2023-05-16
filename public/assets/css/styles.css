@@ -288,7 +288,7 @@ nav {
     height: 90%;
 }
 
-#mediaTricksContainer {
+#media-container {
     padding: 10px;
     margin: 50px;
 }
@@ -296,3 +296,5 @@ nav {
 #addMediaButton {
     margin: 20px;
 }
+
+
