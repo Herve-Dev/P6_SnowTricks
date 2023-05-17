@@ -10,6 +10,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,6 +43,16 @@ class TricksFormType extends AbstractType
                 'by_reference' => false,
                 'prototype' => true,
                 'prototype_name' => '__media_Tricks_index__',
+                'label' => false,
+                'mapped' => false
+            ])
+            ->add('video_tricks', CollectionType::class, [
+                'entry_type' => UrlType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
+                'prototype_name' => '__video_Tricks_index__',
                 'label' => false,
                 'mapped' => false
             ])

@@ -3,6 +3,8 @@
 {% block title %}Ajouter un nouveau tricks{% endblock %}
 
 {% block body %}
+
+{#<iframe src="https://www.youtube.com/embed/SFYYzy0UF-8" frameborder="0" width="400" height="315"></iframe>#}
 <h1>Ajouter un nouveau tricks</h1>
 {{ form_start(tricksForm) }}
     {{ form_row(tricksForm.tricks_name) }}
@@ -22,7 +24,16 @@
     {% endfor %}
     </div>
 
+    <div id="video-container" data-prototype="{{ form_row(tricksForm.video_tricks.vars.prototype)|e }}">
+    {% for videoForm in tricksForm.video_tricks %}
+        <div class="video_form">
+            {{ form_row(videoForm) }}
+        </div>
+    {% endfor %}
+    </div>
+
     <button type="button" class="add-media">Ajouter un média</button>
+    <button type="button" class="add-video">Ajouter une vidéo</button>
 
     
     <button class="uk-button uk-button-primary" type="submit">

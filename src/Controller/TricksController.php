@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MediaTricks;
 use App\Entity\Tricks;
+use App\Entity\VideoTricks;
 use App\Form\TricksFormType;
 use App\Repository\TricksRepository;
 use App\Service\PictureService;
@@ -76,12 +77,31 @@ class TricksController extends AbstractController
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
             dump($mediaTricks);
+
+            $videoTricks = $tricksForm->get('video_tricks')->getData();
+            dump($videoTricks);
             
+            if ($videoTricks) {
+                foreach($videoTricks as $videoTrick)
+                {
+                    
+                    //IMPORTANT FAIRE UNE VERIFICATION DES LIENS PARTAGER ('youtube', 'daylimotion' ...)
+                    dump(str_replace('/watch?v=', '/embed/', $videoTrick));
+                    $url = str_replace('/watch?v=', '/embed/', $videoTrick);
+                    $videoEntity = new VideoTricks();
+                    $videoEntity->setVideoUrl($url);
+                    $tricks->addVideoTrick($videoEntity);
+                }
+            }
           
             foreach($mediaTricks as $mediaTrick) {
+
+                dump($mediaTrick);
                 
                 //On définit le dossier de destination
                 $folder = "media_tricks";
+                
+                
                 
                 //On appelle le service d'ajout
                 $file = $pictureService->add($mediaTrick,$folder, 300, 300);
@@ -99,7 +119,7 @@ class TricksController extends AbstractController
             $this->addFlash('success','tricks ajouté avec succès');
 
             //On redirige 
-            return $this->redirectToRoute('main');
+            //return $this->redirectToRoute('main');
         }
 
         return $this->render('tricks/add.html.twig', [

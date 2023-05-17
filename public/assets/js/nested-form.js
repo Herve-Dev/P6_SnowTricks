@@ -85,5 +85,41 @@
     });
 
 
+    const containerVideo = document.getElementById('video-container');
+    const addVideoButton = document.querySelector('.add-video');
+
+    // Compteur pour générer des index uniques
+    let indexVideoForm = container.querySelectorAll('.video_form').length;
+
+    // Ajoutez un gestionnaire d'événements au bouton "Ajouter un média"
+    addVideoButton.addEventListener('click', () => {
+        console.log('ok');
+        const prototype = containerVideo.getAttribute('data-prototype');
+        const newFormVideo = prototype.replace(/__video_Tricks_index__/g, indexVideoForm);
+
+        // Créez un nouvel élément de collection en ajoutant le formulaire généré au DOM
+        const newElement = document.createElement('div');
+        newElement.classList.add('video_form');
+        newElement.innerHTML = newFormVideo;
+
+        const btnDelete = document.createElement('button');
+        btnDelete.classList.add('delete-url');
+        btnDelete.textContent = 'Suppirmer cette url' 
+
+        newElement.appendChild(btnDelete)
+        container.appendChild(newElement);
+
+        // Incrémentez le compteur pour le prochain élément
+        indexVideoForm++;
+    });
+
+    // Ajoutez un gestionnaire d'événements pour supprimer les éléments de collection
+    container.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-url')) {
+            event.target.closest('.video_form').remove();
+        }
+    });
+
+
 
 

@@ -42,7 +42,16 @@
                                             <li>
                                                 <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="" uk-cover>
                                             </li>
-                                        {% endfor %}    
+                                        {% endfor %} 
+
+                                        {% if trick.VideoTricks %}
+                                            {% for video in trick.VideoTricks %}
+                                                <li>
+                                                    <iframe src={{video.videoUrl}} frameborder="0"></iframe>
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %}
+                                        
                                     </ul>
                                     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                                     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
