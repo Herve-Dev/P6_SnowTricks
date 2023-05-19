@@ -15,7 +15,14 @@ class CommentFormType extends AbstractType
     {
         $builder
             ->add('comment_tricks',  TextareaType::class, [
-                'label' => 'Votre commentaire' 
+                'label' => false,
+                /*'label_attr' => [
+                    'class' => 'uk-form-label'
+                ],*/
+                'attr' => [
+                    'class' => 'uk-textarea uk-form-small',
+                    'placeholder' => 'Votre commentaire'
+                ]
             ])
         ;
     }

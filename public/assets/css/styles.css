@@ -298,5 +298,21 @@ nav {
 }
 
 .bloc-form-comment {
+    display: flex;
+    justify-content: center;
     border: solid 3px purple;
+}
+
+.form-comment {
+    display: flex;
+    padding: 10px;
+}
+
+textarea {
+    resize: none;
+    min-width: 50vh;
+}
+
+.btn-comment {
+    border: solid 2px black;
 }

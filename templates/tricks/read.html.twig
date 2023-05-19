@@ -75,9 +75,9 @@
         
         <div class="v-slider-bloc bloc-2" id="bloc-comment">
             <div class="bloc-form-comment">
-                {{ form_start(commentForm) }}
+                {{ form_start(commentForm, {'attr': {'class':'uk-form-horizontal form-comment'}}) }}
                     {{form_row(commentForm.comment_tricks)}}
-                    <button type="submit">Ajouter</button>
+                    <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
                 {{ form_end(commentForm) }}
             </div>
         </div>
