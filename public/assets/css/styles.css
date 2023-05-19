@@ -297,3 +297,6 @@ nav {
     margin: 20px;
 }
 
+.bloc-form-comment {
+    border: solid 3px purple;
+}

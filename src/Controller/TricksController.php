@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\MediaTricks;
 use App\Entity\Tricks;
 use App\Entity\VideoTricks;
+use App\Form\CommentFormType;
 use App\Form\TricksFormType;
 use App\Repository\TricksRepository;
 use App\Service\PictureService;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,11 +32,42 @@ class TricksController extends AbstractController
     }
 
     #[Route('/readTricks/{id}', name: 'read_tricks')]
-    public function readTricks(TricksRepository $tricksRepository, int $id): Response
+    public function readTricks(TricksRepository $tricksRepository, int $id, Request $request, EntityManagerInterface $em): Response
     {
         // On recupère toute le tricks selon son id pour l'injecter à la vue
         $tricksSelected = $tricksRepository->findOneBy(['id' => $id]);
-        return $this->render('tricks/read.html.twig', compact('tricksSelected'));
+
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentFormType::class, $comment);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            
+
+            $user = $this->getUser();
+            dump($user);
+
+            //On stock l'id de l'utilisateur dans le commentaire
+            $comment->setUser($user);
+
+            $comment->setTricks($tricksSelected);
+
+            //A mettre dans un service
+            $currentDate = new \DateTimeImmutable('NOW', new DateTimeZone('Europe/Paris'));
+            dump($currentDate->format('d-m-Y H:i:s'));
+
+            $comment->setCommentCreatedAt(new \DateTimeImmutable('NOW', new DateTimeZone('Europe/Paris')));
+
+            $em->persist($comment);
+            $em->flush();
+            
+            return $this->redirectToRoute('tricks_read_tricks', ['id' => $tricksSelected->getId()]);
+        }
+
+        return $this->render('tricks/read.html.twig', [
+            'tricksSelected' => $tricksSelected,
+            'commentForm' => $commentForm->createView()
+        ] );
     }
 
     #[Route('/add/picture', name: 'add_picture_tricks', methods: ['POST'])]

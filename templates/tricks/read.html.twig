@@ -74,7 +74,12 @@
         </div>
         
         <div class="v-slider-bloc bloc-2" id="bloc-comment">
-            
+            <div class="bloc-form-comment">
+                {{ form_start(commentForm) }}
+                    {{form_row(commentForm.comment_tricks)}}
+                    <button type="submit">Ajouter</button>
+                {{ form_end(commentForm) }}
+            </div>
         </div>
     
     </div>
