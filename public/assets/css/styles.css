@@ -316,3 +316,17 @@ textarea {
 .btn-comment {
     border: solid 2px black;
 }
+
+.bloc-comment {
+    width: 100%;
+    height: 100%;
+    border: solid 2px blue;
+}
+
+.card-comment {
+    border: solid 3px green;
+}
+
+p {
+    font-size: medium;
+}

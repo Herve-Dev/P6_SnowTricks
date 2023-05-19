@@ -80,6 +80,24 @@
                     <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
                 {{ form_end(commentForm) }}
             </div>
+
+            <div class="bloc-comment">
+
+                {% for comment in tricksSelected.Comment %}
+                    <div class="card-comment">
+                        <div class="card-comment-header">
+                            <h3>Auteur : <b>{{comment.user.username}}</b> </h3>
+                            <p> posté le : <em>{{comment.commentCreatedAt | date("d/m/y H:i:s") }}</em></p>
+                        </div>
+                        <hr>
+                        <div class="card-comment-body">
+                            <p> <b>commentaire :</b> </p>
+                            <p>{{comment.commentTricks}}</p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
         </div>
     
     </div>
