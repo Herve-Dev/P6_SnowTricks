@@ -8,6 +8,7 @@ use App\Entity\Tricks;
 use App\Entity\VideoTricks;
 use App\Form\CommentFormType;
 use App\Form\TricksFormType;
+use App\Repository\CommentRepository;
 use App\Repository\TricksRepository;
 use App\Service\PictureService;
 use DateTimeImmutable;
@@ -32,7 +33,7 @@ class TricksController extends AbstractController
     }
 
     #[Route('/readTricks/{id}', name: 'read_tricks')]
-    public function readTricks(TricksRepository $tricksRepository, int $id, Request $request, EntityManagerInterface $em): Response
+    public function readTricks(TricksRepository $tricksRepository, int $id, Request $request, EntityManagerInterface $em, CommentRepository $commentRepository): Response
     {
         // On recupère toute le tricks selon son id pour l'injecter à la vue
         $tricksSelected = $tricksRepository->findOneBy(['id' => $id]);
@@ -40,6 +41,12 @@ class TricksController extends AbstractController
         $comment = new Comment();
         $commentForm = $this->createForm(CommentFormType::class, $comment);
         $commentForm->handleRequest($request);
+
+        //On va chercher le numero de page dans l'url
+        $page = $request->query->getInt('page', 1);
+
+        // Pagination de mes commentaires
+        $commentPaginate = $commentRepository->findCommentsPaginated($page, $tricksSelected->getId(), 1);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             
@@ -66,7 +73,8 @@ class TricksController extends AbstractController
 
         return $this->render('tricks/read.html.twig', [
             'tricksSelected' => $tricksSelected,
-            'commentForm' => $commentForm->createView()
+            'commentForm' => $commentForm->createView(),
+            'commentPaginate' => $commentPaginate,
         ] );
     }
 

@@ -83,7 +83,7 @@
 
             <div class="bloc-comment">
 
-                {% for comment in tricksSelected.Comment %}
+                {% for comment in commentPaginate.data %}
                     <div class="card-comment">
                         <div class="card-comment-header">
                             <h3>Auteur : <b>{{comment.user.username}}</b> </h3>
