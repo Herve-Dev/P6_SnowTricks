@@ -1,7 +1,80 @@
+{#{% if pages > 1 %}
+    <ul class="uk-pagination" uk-margin>
+        <li>
+
+        {% if currentPage > 1 %}
+            <a href="{{ path(path, {id: id_tricks , id_tricks: id_tricks, page: currentPage - 1}) }}">
+                <span uk-pagination-previous></span>
+            </a>
+        {% else %}
+            <a href="{{ path(path, {id: id_tricks , id_tricks: id_tricks, page: currentPage - 1}) }}">
+                <span uk-pagination-previous></span>
+            </a>
+        {% endif %}    
+        </li>
+
+
+        {% for page in 1..pages %}
+            <li>
+            {% if page == currentPage %}
+                <span class="uk-active">{{ page }}</span>
+            {% else %}
+                <a href="{{ path(path, {id: id_tricks , id_tricks: id_tricks, page: page}) }}">
+                    {{ page }}
+                </a>
+            {% endif %}
+            
+            </li>
+        {% endfor %}
+
+        
+        <li>
+            {% if currentPage < pages %}
+                <a href="{{ path(path, {id: id_tricks , id_tricks: id_tricks, page: currentPage + 1}) }}">
+                    <span uk-pagination-next></span>
+                </a>
+            {% else %}
+                <a href="{{ path(path, {id: id_tricks , id_tricks: id_tricks, page: currentPage + 1}) }}">
+                    <span uk-pagination-next></span>
+                </a>
+            {% endif %} 
+        </li>
+    </ul>
+{% endif %}#}
+
 {% if pages > 1 %}
-    <ul class="uk-pagination">
-        <li><a href=""></a></li>
-        <li class="uk-active"><span></span></li>
-        <li class="uk-disabled"><span></span></li>
+    <ul class="uk-pagination" uk-margin>
+        <li>
+            {% if currentPage > 1 %}
+                <a class="uk-link" href="{{ path(path, {id: id_tricks, id_tricks: id_tricks, page: currentPage - 1}) }}">
+                    <span uk-pagination-previous></span>
+                    Précédent
+                </a>
+            {% else %}
+                <span uk-pagination-previous></span>
+                Précédent
+            {% endif %}    
+        </li>
+
+        {% for page in 1..pages %}
+            {% if page == currentPage %}
+                <li class="uk-active"><span>{{ page }}</span></li>
+            {% else %}
+                <li><a class="uk-link" href="{{ path(path, {id: id_tricks, id_tricks: id_tricks, page: page}) }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <li>
+            {% if currentPage < pages %}
+                <a class="uk-link" href="{{ path(path, {id: id_tricks, id_tricks: id_tricks, page: currentPage + 1}) }}">
+                    <span uk-pagination-next></span>
+                    Suivant
+                </a>
+            {% else %}
+                <span uk-pagination-next></span>
+                Suivant
+            {% endif %} 
+        </li>
     </ul>
 {% endif %}
+

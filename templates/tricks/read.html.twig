@@ -95,8 +95,13 @@
                             <p>{{comment.commentTricks}}</p>
                         </div>
                     </div>
-
                 {% endfor %}
+
+                {% set path = 'tricks_read_tricks' %}
+                {% set id_tricks = tricksSelected.id %}
+                {% set pages = commentPaginate.pages %}
+                {% set currentPage = commentPaginate.page %}
+                {% include "_partials/_pagination.html.twig" %}
             </div>
         </div>
     
