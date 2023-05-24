@@ -74,12 +74,22 @@
         </div>
         
         <div class="v-slider-bloc bloc-2" id="bloc-comment">
+        {% if app.user %}
             <div class="bloc-form-comment">
                 {{ form_start(commentForm, {'attr': {'class':'uk-form-horizontal form-comment'}}) }}
                     {{form_row(commentForm.comment_tricks)}}
                     <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
                 {{ form_end(commentForm) }}
             </div>
+        {% else %}
+            <div class="bloc-form-comment">
+                <p uk-margin>
+                    <a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter</a>
+                </p>
+            </div>
+        {% endif %}
+        
+            
 
             <div class="bloc-comment">
 
