@@ -83,7 +83,7 @@
 
             <div class="bloc-comment">
 
-                {% for comment in commentPaginate.data %}
+                {#{% for comment in commentPaginate.data %}
                     <div class="card-comment">
                         <div class="card-comment-header">
                             <h3>Auteur : <b>{{comment.user.username}}</b> </h3>
@@ -92,19 +92,25 @@
                         <hr>
                         <div class="card-comment-body">
                             <p> <b>commentaire :</b> </p>
-                            <p>{{comment.commentTricks}}</p>
+                            <p class="paragraph-comment">{{comment.commentTricks}}</p>
                         </div>
                     </div>
-                {% endfor %}
+                {% endfor %}#}
 
-                {% set path = 'tricks_read_tricks' %}
+                
+            </div>
+            <div id="containerPagination"></div>
+                {#{% set path = 'tricks_read_tricks' %}
                 {% set id_tricks = tricksSelected.id %}
                 {% set pages = commentPaginate.pages %}
                 {% set currentPage = commentPaginate.page %}
-                {% include "_partials/_pagination.html.twig" %}
-            </div>
+                {% include "_partials/_pagination.html.twig" %}#}
         </div>
     
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/paginate-comment.js') }}" defer></script>
 {% endblock %}

@@ -4,7 +4,7 @@ let links = document.querySelectorAll("[data-delete]");
 for(let link of links) {
     // On met un écouteur d'évenements
     link.addEventListener("click", function(e){
-        // On empêchela navidation
+        // On empêche la navidation
         e.preventDefault();
 
         // On demande confimation

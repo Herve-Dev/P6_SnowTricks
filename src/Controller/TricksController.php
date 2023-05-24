@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
@@ -46,8 +47,12 @@ class TricksController extends AbstractController
         $page = $request->query->getInt('page', 1);
 
         // Pagination de mes commentaires
-        $commentPaginate = $commentRepository->findCommentsPaginated($page, $tricksSelected->getId(), 1);
+        //$commentPaginate = $commentRepository->findCommentsPaginated($page, $tricksSelected->getId(), 2);
+        $datasFound = $commentRepository->findBy(['tricks' => $id]);
+        //dd($this->getUser());
+        
 
+        
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             
 
@@ -74,7 +79,7 @@ class TricksController extends AbstractController
         return $this->render('tricks/read.html.twig', [
             'tricksSelected' => $tricksSelected,
             'commentForm' => $commentForm->createView(),
-            'commentPaginate' => $commentPaginate,
+            //'commentPaginate' => $commentPaginate,
         ] );
     }
 

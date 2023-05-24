@@ -22,7 +22,7 @@
 
         <li>
             {% if currentPage < pages %}
-                <a class="uk-link" href="{{ path(path, {id: id_tricks, id_tricks: id_tricks, page: currentPage + 1}) }}">
+                <a class="uk-link" id="next-link-comment" data-current-next="{{currentPage + 1}}" data-tricks-id="{{ id_tricks }}"  href="{{ path(path, {id: id_tricks, id_tricks: id_tricks, page: currentPage + 1}) }}">
                     <span uk-pagination-next></span>
                     Suivant
                 </a>
