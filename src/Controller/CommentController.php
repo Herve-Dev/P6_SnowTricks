@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Form\CommentFormType;
 use App\Repository\CommentRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,12 +90,41 @@ class CommentController extends AbstractController
     }
 
     #[route('/api/paginate/updateComment/{id}', name: 'api_paginate_update', methods: ['POST'])]
-    public function apiUpdateComment(Request $request, CommentRepository $commentRepository): JsonResponse
+    public function apiUpdateComment(Request $request, CommentRepository $commentRepository, int $id, EntityManagerInterface $em): JsonResponse
     {
-        $data = json_decode($request->getContent(), true);
+        $comment = $commentRepository->findOneBy(['id' => $id]);
 
-        return new JsonResponse([
-            'data' => $data
-        ]);
+        //On verifie si le commentaire existe
+        if (!$comment) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => "le commentaire n'a pas été trouvé"
+            ], 404);
+        } else {
+
+            //On récupere les datas du fetch
+            $data = json_decode($request->getContent(), true);
+
+            //On verifie si la propriété à mettre à jour existe
+            if (isset($data['valueUpdateComment'])) {
+                //On stocke les nouvelle données dans le commentaire
+                $comment->setCommentTricks($data['valueUpdateComment']);
+            }
+
+            //On enregistre les modification en BDD
+            $em->persist($comment);
+            $em->flush();
+
+            //On crée le message qui sera retourné au front
+            $response = [
+                'status' => 'success',
+                'message' => 'Commentaire modifié avec succes !'
+            ];
+
+             return new JsonResponse([
+                'data' => $response
+            ], 200);
+        }
+       
     }
 }

@@ -5,6 +5,9 @@ let currentURL = window.location.href
 let segments = currentURL.split("/");
 var idTricks = segments[segments.length - 1];
 
+//On prépare une variable pour lui passer id de l'user récupéré
+let idUserConnected = null;
+
 let data = {
   idTricks: parseInt(idTricks) ,
 }
@@ -29,8 +32,6 @@ fetch('/comment/api/paginate', getDataComment)
   return response.json();
 })
 .then(data => {
-  console.log(data);
-  console.log(data.userConnected)
 
   const userConnected = data.userConnected.isConnected
   const idUserConnected = data.userConnected.idUserConnected
@@ -113,7 +114,7 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
       <div class="card-comment-actions">
         <a href="" uk-icon="icon: trash" class="delete-comment" data-comment-id="${idComment}"></a>
 
-        <a href="#" uk-icon="icon: pencil" onClick="test(${idComment})" class="update-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-update-comment${idComment}'"></a>
+        <a href="#" uk-icon="icon: pencil" onClick="updateCommentWithoutRefresh(${idComment})" class="update-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-update-comment${idComment}'"></a>
         <div id="my-id-update-comment${idComment}" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
               <p> Modifier mon commentaire </p>
@@ -123,7 +124,7 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
               </form>
 
               <a class="uk-button uk-button-default uk-modal-close" href="#" >Annuler</a>
-              <a class="uk-button uk-button-primary btn-update-comment-${idComment}" onClick='apiUpdateComment(${idComment},${idUserConnected})' href="#" data-id-update-comment="${idComment}">valider</a>
+              <a class="uk-button uk-button-primary uk-modal-close btn-update-comment-${idComment}" href="#" data-id-update-comment="${idComment}" data-user="${idUserConnected}"">valider</a>
           </div>
       </div>
       `
@@ -133,18 +134,82 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
 }
 
 
+/**
+ * Fonctionn injecter dans 
+ * generate html "balise <a class="update-comment"></a>" 
+ * je passe directement idComment dans ma fonction généré par js 
+ */
+
 function updateCommentWithoutRefresh(idComment) {
   // On récupere le textarea conrespondant au click
   let textarea = document.querySelector(`.textarea-${idComment}`);
 
   //On récupere le commentaire correspondant
   let comment = document.querySelector(`.paragraph-comment-${idComment}`);
-
+  
   //On ajoute un adeventLister au textarea pour mettre a jour en temps reel le paragraphe
   textarea.addEventListener('input', () => {
-    let newValue = escapeHTML(textarea.value)
+    let newValue = escapeHTML(textarea.value) // fonction securité pour l'input
+
+    //insertion nouvelle valeur dans le commentaire
     comment.textContent = newValue;
   });
+
+  //On cible le bouton 'valider'
+  const btnUpdateComment = document.querySelector(`.btn-update-comment-${idComment}`)
+  btnUpdateComment.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let idUser = parseInt(btnUpdateComment.dataset.user) ;
+    
+    
+    //On creer les données qui seront envoyée a la route php pour le controller
+    let dataUpdataComment = {
+      idComment: idComment,
+      valueUpdateComment: comment.textContent,
+      idUser: idUser
+    }
+
+    console.log(dataUpdataComment);
+    
+    let dataToSendFetch = getRequestOptions(dataUpdataComment)
+
+    fetch(`/comment/api/paginate/updateComment/${idComment}`, dataToSendFetch)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erreur lors de la requête');
+      }
+    })
+    .then(data => {
+      // Faites quelque chose avec les données renvoyées
+      let status = data.data.status;
+      let message = data.data.message;
+
+      messageAlert(status, message)
+    })
+    .catch(error => {
+      // Gérez les erreurs ici
+      messageAlert(error.status, error.message)
+    });
+    
+  })
+  
+}
+
+
+//function pour afficher message req AJAX
+function messageAlert(status, message){
+if (status === 'error') {
+  status = 'danger'
+}
+
+  UIkit.notification({
+      message: message,
+      status: status,
+      timeout: 5000
+    });
 }
 
 
@@ -156,23 +221,22 @@ function escapeHTML(value) {
 }
 
 
-function apiUpdateComment(idComment, idUser) {
-  //On cible le textarea
+function apiUpdateComment(idComment, newValue, idUser) {
+  /*//On cible le textarea
   const currentTextarea = document.querySelector(`.textarea-${idComment}`)
   
   //On recupere la value
   const commentValue = currentTextarea.value
 
   //On recupere le paragraphe du commentaire
-  const comment = document.querySelector(`.paragraph-comment-${idComment}`)
+  const comment = document.querySelector(`.paragraph-comment-${idComment}`)*/
   
 
   const btnUpdateComment = document.querySelector(`.btn-update-comment-${idComment}`)
-  btnUpdateComment.addEventListener('click', () => {
+  btnUpdateComment.addEventListener('click', (e) => {
+    e.preventDefault();
     
-    comment.textContent = commentValue
-    
-    console.log(commentValue);
+    console.log(newValue);
   })
 
 }
