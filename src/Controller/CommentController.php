@@ -46,7 +46,10 @@ class CommentController extends AbstractController
         //On récupere id du tricks reçu du front
         $idTricks = $data['idTricks'];
 
-        $datasFound = $commentRepository->findBy(['tricks' => $idTricks]);
+        $datasFound = $commentRepository->findBy(
+            ['tricks' => $idTricks],
+            ['comment_created_at' => 'DESC']
+        );
 
         //On crée un array qui stock les donnée a envoyé au front pour paginée
         $sendData = [];
