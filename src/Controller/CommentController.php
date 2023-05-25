@@ -41,15 +41,12 @@ class CommentController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        //On récupere id du tricks reçu du front
         $idTricks = $data['idTricks'];
-        //$page = $data['page'];
-
-        //$commentPaginate = $commentRepository->findCommentsPaginated($page, $idTricks, 2);
-        
-        //$datasFound = $commentPaginate['data'];
 
         $datasFound = $commentRepository->findBy(['tricks' => $idTricks]);
 
+        //On crée un array qui stock les donnée a envoyé au front pour paginée
         $sendData = [];
 
         foreach($datasFound as $data)
@@ -65,9 +62,7 @@ class CommentController extends AbstractController
             array_push($sendData, $dataPage);
         }
 
-
-        
-
+        //Fonction envoyer au js si user connecté
         function userConnected($user)
         {
             $userConnected = [
@@ -80,25 +75,11 @@ class CommentController extends AbstractController
                     'idUserConnected' => $user->getId(),
                 ];
             } 
-
             return $userConnected;
         }
 
         $user = $this->getUser();
-        $userData = userConnected($user);
-
-        // Code pour verifier si user connecter pour crud des commentaires
-        
-       /* if ($userConnected !== null) {
-            $userConnected = [
-                'idUser' => $userConnected->getId() //Erreur sur IDE mais fonctionne
-            ];
-        }*/
-        
-        
-
-
-        
+        $userData = userConnected($user);        
 
         return new JsonResponse([
             'data' => $sendData,
@@ -106,4 +87,13 @@ class CommentController extends AbstractController
         ], 200);
     }
 
+    #[route('/api/paginate/updateComment/{id}', name: 'api_paginate_update', methods: ['POST'])]
+    public function apiUpdateComment(Request $request, CommentRepository $commentRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse([
+            'data' => $data
+        ]);
+    }
 }

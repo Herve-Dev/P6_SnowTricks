@@ -49,7 +49,6 @@ class TricksController extends AbstractController
         // Pagination de mes commentaires
         //$commentPaginate = $commentRepository->findCommentsPaginated($page, $tricksSelected->getId(), 2);
         $datasFound = $commentRepository->findBy(['tricks' => $id]);
-        //dd($this->getUser());
         
 
         
