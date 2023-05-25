@@ -133,9 +133,14 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
 }
 
 
-function test(idComment) {
+function updateCommentWithoutRefresh(idComment) {
+  // On récupere le textarea conrespondant au click
   let textarea = document.querySelector(`.textarea-${idComment}`);
+
+  //On récupere le commentaire correspondant
   let comment = document.querySelector(`.paragraph-comment-${idComment}`);
+
+  //On ajoute un adeventLister au textarea pour mettre a jour en temps reel le paragraphe
   textarea.addEventListener('input', () => {
     let newValue = escapeHTML(textarea.value)
     comment.textContent = newValue;
