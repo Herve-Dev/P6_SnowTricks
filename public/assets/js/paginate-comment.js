@@ -119,17 +119,17 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
       </div>
     </div>`;
 
+
     if(isConnected && idUserConnected === commentIdUser) {
       htmlGenerateWithData += `
       <div class="card-comment-actions">
 
         <a href="#" uk-icon="icon: trash" class="delete-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-delete-comment${idComment}'></a>
-
         <div id="my-id-delete-comment${idComment}" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
               <p>Voulez-vous vraiment supprimer le commentaire : <strong>${comment}</strong> </p>
               <a class="uk-button uk-button-default uk-modal-close" href="#">Annuler</a>
-              <a class="uk-button uk-button-danger  uk-modal-close btn-delete-comment-${idComment}" onClick="deleteComment(${idComment})" href="#" data-id-delete-comment="${idComment}" data-user="${commentIdUser}" >Supprimer</a>
+              <a class="uk-button uk-button-danger  uk-modal-close btn-delete-comment-${idComment}" onClick="deleteComment(${idComment},${idUserConnected})" href="#" data-id-delete-comment="${idComment}" data-user="${commentIdUser}" >Supprimer</a>
           </div>
         </div>
 
@@ -144,7 +144,7 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
               </form>
 
               <a class="uk-button uk-button-default uk-modal-close" href="#" >Annuler</a>
-              <a class="uk-button uk-button-primary uk-modal-close btn-update-comment-${idComment}" href="#" data-id-update-comment="${idComment}" data-user="${commentIdUser}"">valider</a>
+              <a class="uk-button uk-button-primary uk-modal-close btn-update-comment-${idComment}" href="#" data-id-update-comment="${idComment}"">valider</a>
           </div>
 
       </div>
@@ -202,7 +202,7 @@ function updateCommentWithoutRefresh(idComment) {
       }
     })
     .then(data => {
-      // Faites quelque chose avec les données renvoyées
+      //On stock les datas récupéré dans des variables
       let status = data.data.status;
       let message = data.data.message;
 
@@ -241,9 +241,10 @@ function escapeHTML(value) {
 
 
 // Fonction pour supprimer un commentaire
-function deleteComment(commentId) {
+function deleteComment(commentId, idUserConnected) {
+
   // Envoyer une requête de suppression au serveur
-  fetch(`/comment/api/paginate/deleteComment/${commentId}`, {
+  fetch(`/comment/api/paginate/deleteComment/${commentId}/${idUserConnected}`, {
     method: 'DELETE'
   })
     .then(response => {
@@ -267,7 +268,6 @@ function deleteComment(commentId) {
       messageAlert(status, message);
     })
     .catch(error => {
-      // Gérez les erreurs ici
       messageAlert('error', error.message);
     });
 }

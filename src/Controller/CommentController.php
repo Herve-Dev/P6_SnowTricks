@@ -130,8 +130,8 @@ class CommentController extends AbstractController
        
     }
 
-    #[route('/api/paginate/deleteComment/{id}', name: 'api_paginate_delete', methods: ['DELETE'])]
-    public function apiDeleteComment(Request $request, CommentRepository $commentRepository, int $id, EntityManagerInterface $em): JsonResponse
+    #[route('/api/paginate/deleteComment/{id}/{idUser}', name: 'api_paginate_delete', methods: ['DELETE'])]
+    public function apiDeleteComment(Request $request, CommentRepository $commentRepository, int $id, int $idUser, EntityManagerInterface $em): JsonResponse
     {
 
 
@@ -144,6 +144,14 @@ class CommentController extends AbstractController
                 'status' => 'error',
                 'message' => 'Commentaire introuvable.'
             ], 404);
+        } else {
+            //On vérifie si l'utilisateur est le propriétaire du commentaire
+            if ($comment->getUser()->getId() !== $idUser) {
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => 'Vous n\'êtes pas autorisé à supprimer ce commentaire.'
+                ], 404);
+            }
         }
 
         // Supprimer le commentaire
