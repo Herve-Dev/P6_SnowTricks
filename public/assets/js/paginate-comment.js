@@ -230,25 +230,6 @@ function escapeHTML(value) {
 }
 
 
-function apiUpdateComment(idComment, newValue, idUser) {
-  /*//On cible le textarea
-  const currentTextarea = document.querySelector(`.textarea-${idComment}`)
-  
-  //On recupere la value
-  const commentValue = currentTextarea.value
-
-  //On recupere le paragraphe du commentaire
-  const comment = document.querySelector(`.paragraph-comment-${idComment}`)*/
-  
-
-  const btnUpdateComment = document.querySelector(`.btn-update-comment-${idComment}`)
-  btnUpdateComment.addEventListener('click', (e) => {
-    e.preventDefault();
-    
-    console.log(newValue);
-  })
-
-}
 
 
 
