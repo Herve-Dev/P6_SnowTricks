@@ -55,7 +55,6 @@ class CommentController extends AbstractController
 
         foreach($datasFound as $data)
         {
-
             $dataPage = [
                 'idComment' => $data->getId(),
                 'comment' => $data->getCommentTricks(),
@@ -133,10 +132,6 @@ class CommentController extends AbstractController
     #[route('/api/paginate/deleteComment/{id}/{idUser}', name: 'api_paginate_delete', methods: ['DELETE'])]
     public function apiDeleteComment(Request $request, CommentRepository $commentRepository, int $id, int $idUser, EntityManagerInterface $em): JsonResponse
     {
-
-
-        //IMPORTANT Vérifier authentification de l'utilisateur avant suppression !!!!
-
         // Vérifier si le commentaire existe
         $comment = $commentRepository->find($id);
         if (!$comment) {

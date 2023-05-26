@@ -33,6 +33,11 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/tricks/addTricks, roles: ROLE_USER}
+        - { path: ^/tricks/updateTricks, roles: ROLE_USER}
+        - { path: ^/tricks/delete/image, roles: ROLE_USER}
+        - { path: ^/tricks/deleteTricks, roles: ROLE_USER}
+        - { path: ^/comment/addComment, roles: ROLE_USER}
 
 when@test:
     security:
