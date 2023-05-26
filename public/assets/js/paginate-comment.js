@@ -62,6 +62,7 @@ function displayComments(pageNumber) {
       //On genere html qui sera afficher 
       let commentHTML = generateCommentHTML(comment.user, comment.createdAt, comment.comment, userConnected, idUserConnected, comment.commentIdUser, comment.idComment);
       let commentDiv = document.createElement('div');
+      commentDiv.className = "bloc-card-comment-"+ comment.idComment
       commentDiv.innerHTML = commentHTML;
       containerComment.appendChild(commentDiv);
     
@@ -121,7 +122,17 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
     if(isConnected && idUserConnected === commentIdUser) {
       htmlGenerateWithData += `
       <div class="card-comment-actions">
-        <a href="" uk-icon="icon: trash" class="delete-comment" data-comment-id="${idComment}"></a>
+
+        <a href="#" uk-icon="icon: trash" class="delete-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-delete-comment${idComment}'></a>
+
+        <div id="my-id-delete-comment${idComment}" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+              <p>Voulez-vous vraiment supprimer le commentaire : <strong>${comment}</strong> </p>
+              <a class="uk-button uk-button-default uk-modal-close" href="#">Annuler</a>
+              <a class="uk-button uk-button-danger  uk-modal-close btn-delete-comment-${idComment}" onClick="deleteComment(${idComment})" href="#" data-id-delete-comment="${idComment}" data-user="${commentIdUser}" >Supprimer</a>
+          </div>
+        </div>
+
 
         <a href="#" uk-icon="icon: pencil" onClick="updateCommentWithoutRefresh(${idComment})" class="update-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-update-comment${idComment}'"></a>
         <div id="my-id-update-comment${idComment}" uk-modal>
@@ -133,8 +144,9 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
               </form>
 
               <a class="uk-button uk-button-default uk-modal-close" href="#" >Annuler</a>
-              <a class="uk-button uk-button-primary uk-modal-close btn-update-comment-${idComment}" href="#" data-id-update-comment="${idComment}" data-user="${idUserConnected}"">valider</a>
+              <a class="uk-button uk-button-primary uk-modal-close btn-update-comment-${idComment}" href="#" data-id-update-comment="${idComment}" data-user="${commentIdUser}"">valider</a>
           </div>
+
       </div>
       `
     }
@@ -178,8 +190,6 @@ function updateCommentWithoutRefresh(idComment) {
       valueUpdateComment: comment.textContent,
       idUser: idUser
     }
-
-    console.log(dataUpdataComment);
     
     let dataToSendFetch = getRequestOptions(dataUpdataComment)
 
@@ -230,6 +240,47 @@ function escapeHTML(value) {
 }
 
 
+// Fonction pour supprimer un commentaire
+function deleteComment(commentId) {
+  // Envoyer une requête de suppression au serveur
+  fetch(`/comment/api/paginate/deleteComment/${commentId}`, {
+    method: 'DELETE'
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erreur lors de la requête');
+      }
+    })
+    .then(data => {
+      // Faites quelque chose avec les données renvoyées
+      let status = data.data.status;
+      let message = data.data.message;
+
+      // Supprimer le commentaire de l'affichage
+      const commentDiv = document.querySelector(`.bloc-card-comment-${commentId}`);
+      if (commentDiv) {
+        commentDiv.remove();
+      }
+
+      messageAlert(status, message);
+    })
+    .catch(error => {
+      // Gérez les erreurs ici
+      messageAlert('error', error.message);
+    });
+}
+
+// Ajouter un gestionnaire d'événements pour les boutons de suppression de commentaire
+const deleteButtons = document.querySelectorAll('.delete-comment');
+deleteButtons.forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    const commentId = button.getAttribute('data-comment-id');
+    deleteComment(commentId);
+  });
+});
 
 
 

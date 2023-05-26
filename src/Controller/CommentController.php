@@ -129,4 +129,33 @@ class CommentController extends AbstractController
         }
        
     }
+
+    #[route('/api/paginate/deleteComment/{id}', name: 'api_paginate_delete', methods: ['DELETE'])]
+    public function apiDeleteComment(Request $request, CommentRepository $commentRepository, int $id, EntityManagerInterface $em): JsonResponse
+    {
+
+        // Vérifier si le commentaire existe
+        $comment = $commentRepository->find($id);
+        if (!$comment) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Commentaire introuvable.'
+            ], 404);
+        }
+
+        // Supprimer le commentaire
+        $em->remove($comment);
+        $em->flush();
+
+        //On crée le message qui sera retourné au front
+        $response = [
+            'status' => 'success',
+            'message' => 'Commentaire supprimez avec succes !'
+        ];
+
+         return new JsonResponse([
+            'data' => $response
+        ], 200);
+    }
+
 }

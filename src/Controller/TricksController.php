@@ -166,7 +166,7 @@ class TricksController extends AbstractController
             $this->addFlash('success','tricks ajouté avec succès');
 
             //On redirige 
-            //return $this->redirectToRoute('main');
+            return $this->redirectToRoute('main');
         }
 
         return $this->render('tricks/add.html.twig', [
