@@ -134,6 +134,9 @@ class CommentController extends AbstractController
     public function apiDeleteComment(Request $request, CommentRepository $commentRepository, int $id, EntityManagerInterface $em): JsonResponse
     {
 
+
+        //IMPORTANT Vérifier authentification de l'utilisateur avant suppression !!!!
+
         // Vérifier si le commentaire existe
         $comment = $commentRepository->find($id);
         if (!$comment) {
