@@ -1,17 +1,24 @@
 let containerComment = document.querySelector('.bloc-comment')
 let containerPagination = document.getElementById('containerPagination')
 
+//On récupere l'url actuelle
 let currentURL = window.location.href
+
+//On enleve le slash 
 let segments = currentURL.split("/");
+
+//On récupere le dernier parametre (en logique id du tricks)
 var idTricks = segments[segments.length - 1];
 
 //On prépare une variable pour lui passer id de l'user récupéré
 let idUserConnected = null;
 
+//On prépare les données qui seront envoyer à la route pour PHP 
 let data = {
   idTricks: parseInt(idTricks) ,
 }
 
+//Fonction option pour fetch
 function getRequestOptions(data) {
   return {
     method: 'POST',
@@ -22,6 +29,7 @@ function getRequestOptions(data) {
   };
 }
 
+//On apelle la fonction on lui passe l'objet en parametre
 const getDataComment = getRequestOptions(data)
 
 fetch('/comment/api/paginate', getDataComment)
@@ -50,7 +58,8 @@ function displayComments(pageNumber) {
   
   // Afficher les commentaires de la page actuelle
   commentsToShow.forEach(comment => {
-    // Afficher le commentaire sur la page (exemple: console.log(comment);)
+    
+      //On genere html qui sera afficher 
       let commentHTML = generateCommentHTML(comment.user, comment.createdAt, comment.comment, userConnected, idUserConnected, comment.commentIdUser, comment.idComment);
       let commentDiv = document.createElement('div');
       commentDiv.innerHTML = commentHTML;
@@ -74,7 +83,7 @@ function generatePaginationLinks() {
       displayComments(i); // Afficher les commentaires de la page correspondante
     });
     
-    // Ajouter le lien à la page (exemple: document.body.appendChild(link);)
+    // Ajouter le lien à la page 
     containerPagination.appendChild(link)
   }
 }
