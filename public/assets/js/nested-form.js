@@ -68,6 +68,7 @@
 
         const btnDelete = document.createElement('button');
         btnDelete.classList.add('delete-media');
+        btnDelete.classList.add('uk-button');
         btnDelete.textContent = 'Suppirmer cette photo' 
 
         newElement.appendChild(btnDelete)

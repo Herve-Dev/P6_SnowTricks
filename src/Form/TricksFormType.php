@@ -29,13 +29,11 @@ class TricksFormType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'category_tricks',
-                'label' => 'Categorie du tricks :'
+                'label' => 'Categorie du tricks :',
+                'attr' => [
+                    'class' => 'uk-select'
+                ]
             ])
-            /*->add('media_tricks', FileType::class, [
-                'label' => 'ajouter une image :',
-                'multiple' => true,
-                'mapped' => false,
-            ])*/
             ->add('media_tricks', CollectionType::class, [
                 'entry_type' => FileType::class,
                 'allow_add' => true,

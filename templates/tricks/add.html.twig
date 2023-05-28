@@ -4,42 +4,61 @@
 
 {% block body %}
 
-{#<iframe src="https://www.youtube.com/embed/SFYYzy0UF-8" frameborder="0" width="400" height="315"></iframe>#}
-<h1>Ajouter un nouveau tricks</h1>
-{{ form_start(tricksForm) }}
-    {{ form_row(tricksForm.tricks_name) }}
-    {{ form_row(tricksForm.tricks_description) }}
-    {{ form_row(tricksForm.category) }}
-    {#{{ form_row(tricksForm.media_tricks) }}#} 
+<div class="bloc-form-add-trick">
 
-    
-    {#<div id="mediaTricksContainer"></div>
-    <button type="button" data-index="{{ tricksForm.media_tricks|length }}" id="add-media-button">Ajouter un fichier</button>#}
-
-    <div id="media-container" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
-    {% for mediaForm in tricksForm.media_tricks %}
-        <div class="media">
-            {{ form_row(mediaForm) }}
+    {{ form_start(tricksForm, {'attr' : {'class': 'form-add-tricks uk-box-shadow-medium'}}) }}
+        <div class="bloc-trick-form">
+            {{ form_label(tricksForm.tricks_name) }}
+            {{ form_widget(tricksForm.tricks_name) }}
         </div>
-    {% endfor %}
-    </div>
 
-    <div id="video-container" data-prototype="{{ form_row(tricksForm.video_tricks.vars.prototype)|e }}">
-    {% for videoForm in tricksForm.video_tricks %}
-        <div class="video_form">
-            {{ form_row(videoForm) }}
+        <div class="bloc-trick-form">
+            {{ form_label(tricksForm.tricks_description) }}
+            {{ form_widget(tricksForm.tricks_description) }}
         </div>
-    {% endfor %}
-    </div>
 
-    <button type="button" class="add-media">Ajouter un média</button>
-    <button type="button" class="add-video">Ajouter une vidéo</button>
+        <div class="bloc-trick-form">
+            {{ form_label(tricksForm.category) }}
+            {{ form_widget(tricksForm.category) }}
+        </div>
+                
+        {#<div id="mediaTricksContainer"></div>
+        <button type="button" data-index="{{ tricksForm.media_tricks|length }}" id="add-media-button">Ajouter un fichier</button>#}
 
-    
-    <button class="uk-button uk-button-primary" type="submit">
-        Ajouter mon tricks
-    </button>
-{{ form_end(tricksForm) }}
+        <div id="media-container" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
+        {% for mediaForm in tricksForm.media_tricks %}
+            <div class="media">
+                {{ form_row(mediaForm) }}
+            </div>
+        {% endfor %}
+        </div>
+
+        <div id="video-container" data-prototype="{{ form_row(tricksForm.video_tricks.vars.prototype)|e }}">
+        {% for videoForm in tricksForm.video_tricks %}
+            <div class="video_form">
+                {{ form_row(videoForm) }}
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="bloc-trick-form">
+            <button type="button" class="add-media uk-button">Ajouter un média</button>
+        </div>
+
+        <div class="bloc-trick-form">
+            <button type="button" class="add-video uk-button">Ajouter une vidéo</button>
+        </div>
+
+        
+        
+
+        
+        <button class="uk-button uk-button-primary" type="submit">
+            Ajouter mon tricks
+        </button>
+    {{ form_end(tricksForm) }}
+</div>
+
 
 {% endblock %}
 

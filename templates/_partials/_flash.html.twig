@@ -1,6 +1,6 @@
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div class="uk-alert-{{ label }}" uk-alert>
+        <div class="uk-alert-{{ label }}">
             <a class="uk-alert-close" uk-close></a>
             <p>{{ message|raw }}</p>
         </div>
