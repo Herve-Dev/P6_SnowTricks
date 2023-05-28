@@ -41,9 +41,9 @@
                                     <ul class="uk-slideshow-items">
                                         {% for media in trick.MediaTricks %}
                                             <li>
-                                                <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="" uk-cover>
+                                                <img class="img-slideshow" src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="" uk-cover>
                                             </li>
-                                        {% endfor %} 
+                                        {% endfor %}
 
                                         {% if trick.VideoTricks %}
                                             {% for video in trick.VideoTricks %}
@@ -52,7 +52,7 @@
                                                 </li>
                                             {% endfor %}
                                         {% endif %}
-                                        
+
                                     </ul>
                                     <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                                     <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
@@ -66,30 +66,36 @@
                                         <a href="" uk-icon="icon: trash" uk-toggle="{{'target: #my-id-' ~ trick.id }}"></a>
 
                                         <div id="{{'my-id-' ~ trick.id}}" uk-modal>
-                                        <div class="uk-modal-dialog uk-modal-body">
-                                            <p>Voulez-vous vraiment supprimer le tricks : <strong>{{trick.tricksName}}</strong> </p>
-                                            <a class="uk-button uk-button-default uk-modal-close" href="#" >Annuler</a>
-                                            <a class="uk-button uk-button-danger" href="{{ path('tricks_delete_tricks', {id: trick.id}) }}">Supprimer</a>
-                                        </div>
+                                            <div class="uk-modal-dialog uk-modal-body">
+                                                <p>Voulez-vous vraiment supprimer le tricks :
+                                                    <strong>{{trick.tricksName}}</strong>
+                                                </p>
+                                                <a class="uk-button uk-button-default uk-modal-close" href="#">Annuler</a>
+                                                <a class="uk-button uk-button-danger" href="{{ path('tricks_delete_tricks', {id: trick.id}) }}">Supprimer</a>
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
-                                
-                
+                                </div>
                             </div>
-                                
-                                
-                                
-                            </div>
-                        </div>        
+                        </div>
                     {% endfor %}
                 </div>
+                <button id="showMoreButton">Afficher plus</button>
+
+                <div class="bloc-chevron uk-animation-slide-bottom-medium">
+                    <div class="chevron-up chevron">
+                        <a href="#main-top" uk-scroll uk-scroll uk-icon="icon: chevron-up; ratio: 3"></a>
+                    </div>
+                </div> 
+
             </div>
+
             
-            <div class="bloc-chevron uk-animation-slide-bottom-medium">
-                <div class="chevron-up chevron">
-                    <a href="#main-top" uk-scroll uk-scroll uk-icon="icon: chevron-up; ratio: 3"></a>
-                </div>
-            </div>    
+               
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/btn-show-more.js') }}" defer></script>
 {% endblock %}

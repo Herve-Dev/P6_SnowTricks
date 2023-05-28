@@ -36,7 +36,7 @@ li {
 }
 
 .bloc-2 {
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -169,26 +169,35 @@ nav {
     border: solid 2px green;
     width: 90%;
     height: 90%;
+    flex-grow: 1;
+    overflow-y: hidden;
+}
+
+
+
+#showMoreButton {
+    display: block;
+  margin: 20px auto;
 }
 
 .card-tricks {
     display: flex;
     flex-direction: column;
     border: solid 2px purple;
-    width: 250px;
-    height: 200px;
+    width: 40%;
+    height: 280px;
+    margin: 10px;
 }
 
 .card-tricks-body {
     border: solid 2px blue;
     width: 100%;
-    height: 70%;
+    height: 80%;
 }
 
 .card-tricks-footer {
     border: solid 2px red;
     width: 100%;
-    height: 30%;
 }
 
 .container-register-login {
@@ -347,9 +356,9 @@ p {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    margin-top: 50px;
     border-radius: 20px;
     background-color: white;
+    margin: 50px;
 }
 
 .bloc-trick-form {
@@ -365,3 +374,5 @@ p {
 .media {
     margin: 5px;
 }
+
+
