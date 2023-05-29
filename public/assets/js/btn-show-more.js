@@ -1,34 +1,22 @@
-let blocItemMain2 = document.querySelector('.bloc-item-main-2');
-let tricksContainer = document.querySelector('.container-tricks');
-let showMoreButton = document.getElementById('showMoreButton');
-let tricks = document.querySelectorAll('.card-tricks');
-let visibleTricksCount = 4;
+//Je cible le footer
+const targetFooter = document.getElementById('target-footer');
 
-// Afficher les éléments initiaux
-for (let i = 0; i < visibleTricksCount; i++) {
-  tricks[i].style.display = 'block';
-}
+//Je cible le bloc-item-main
+const blocItemMain2 = document.querySelector('.bloc-item-main-2');
 
-showMoreButton.addEventListener('click', function() {
-  // Afficher tous les éléments restants
-  for (let i = visibleTricksCount; i < tricks.length; i++) {
-    tricks[i].style.display = 'block';
-  }
+//Je cible le bouton et lui ajouter un écouteur évenement
+const showMoreButton = document.getElementById('showMoreButton')
+showMoreButton.addEventListener('click', () => {
 
-  // Masquer le bouton "Afficher plus"
-  showMoreButton.style.display = 'none';
-
-  // Réinitialiser la hauteur de bloc-item-main-2
-  blocItemMain2.style.height = 'auto';
+  //Au clique je passe le bloc en auto pour afficher tout les tricks
+  blocItemMain2.style.height = "auto"
   
-  // Mettre à jour la hauteur du bloc v-slider-bloc bloc-2
-  let totalHeight = blocItemMain2.offsetHeight;
-  let containerHeight = tricksContainer.offsetHeight;
+  //je rajoute un scroll view smooth pour cibler la fin des éléments
+  targetFooter.scrollIntoView({
+    behavior: 'smooth',
+  });
 
-  
-  if (totalHeight > containerHeight) {
-    blocItemMain2.style.height = 'auto';
-  } else {
-    blocItemMain2.style.height =  'auto';
-  }
-});
+  //Je retire le bouton showMore 
+  showMoreButton.style.display = 'none'
+
+})

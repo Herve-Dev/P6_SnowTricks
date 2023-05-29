@@ -97,12 +97,14 @@ li {
 
 .bloc-item-main-2 {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: solid 2px blue;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
 }
+    
 
 .bloc-chevron {
     display: flex;
@@ -166,7 +168,7 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    border: solid 2px green;
+    border: solid 5px green;
     width: 90%;
     height: 90%;
     flex-grow: 1;
@@ -177,14 +179,14 @@ nav {
 
 #showMoreButton {
     display: block;
-  margin: 20px auto;
+    margin: 20px auto;
 }
 
 .card-tricks {
     display: flex;
     flex-direction: column;
     border: solid 2px purple;
-    width: 40%;
+    width: 450px;
     height: 280px;
     margin: 10px;
 }
@@ -375,4 +377,27 @@ p {
     margin: 5px;
 }
 
+.div-slideshow{
+    border: solid 3px green;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/*img {
+    width: 100%;
+    height: 100%;
+}*/
+
+.img-slideshow {
+    width: 100%;
+    height: auto;
+}
+
+.container-img-slideshow {
+    border: solid 3px brown;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
