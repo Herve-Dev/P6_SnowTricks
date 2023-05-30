@@ -102,7 +102,7 @@ li {
     align-items: center;
     border: solid 2px blue;
     width: 100%;
-    height: 100vh;
+    height: 100vh; 
 }
     
 
@@ -110,6 +110,7 @@ li {
     display: flex;
     justify-content: flex-end;
     height: 10vh;
+    width: 100%;
 }
 
 #bloc-tagline {
@@ -188,7 +189,7 @@ nav {
     border: solid 2px purple;
     width: 450px;
     height: 280px;
-    margin: 10px;
+    margin: 5px;
 }
 
 .card-tricks-body {
@@ -200,6 +201,7 @@ nav {
 .card-tricks-footer {
     border: solid 2px red;
     width: 100%;
+    height: 100%;
 }
 
 .container-register-login {
@@ -384,20 +386,13 @@ p {
     overflow: hidden;
 }
 
-/*img {
-    width: 100%;
-    height: 100%;
-}*/
-
 .img-slideshow {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
-.container-img-slideshow {
-    border: solid 3px brown;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+
+
+
+
 

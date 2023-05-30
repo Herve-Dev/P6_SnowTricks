@@ -37,20 +37,20 @@
                     {% for trick in tricks %}
                         <div class="card-tricks">
                             <div class="card-tricks-body">
-                                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="min-height: 300; max-height: 300">
+                                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="min-height: 200; max-height: 200">
                                     <ul class="uk-slideshow-items">
                                         {% for media in trick.MediaTricks %}
-                                            <div class="container-img-slideshow">
-                                                <li>
+                                            <li uk-lightbox>
+                                                <a href="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}">
                                                     <img class="img-slideshow" src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" alt="" uk-cover>
-                                                </li>
-                                            </div> 
+                                                </a>
+                                            </li>   
                                         {% endfor %}
 
                                         {% if trick.VideoTricks %}
                                             {% for video in trick.VideoTricks %}
                                                 <li>
-                                                    <iframe src={{video.videoUrl}} frameborder="0"></iframe>
+                                                    <iframe src={{video.videoUrl}} uk-cover></iframe>
                                                 </li>
                                             {% endfor %}
                                         {% endif %}
@@ -82,64 +82,8 @@
                             
                         </div>
                        {% endfor %} 
-                  
-
-                    {#<div class="card-tricks">
-
-                        <div class ="div-slideshow">
-                            <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slideshow="min-height: 300; max-height: 300">
-
-                                <ul class="uk-slideshow-items">
-                                    <li>
-                                        <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-1c179b4a84e5be39f4a0e994cdcb1c8a.webp') }}" alt="" uk-cover>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-1c179b4a84e5be39f4a0e994cdcb1c8a.webp') }}" alt="" uk-cover>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-1c179b4a84e5be39f4a0e994cdcb1c8a.webp') }}" alt="" uk-cover>
-                                    </li>
-                                </ul>
-
-                                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
-                            </div>
-                        </div>
-                        
-                    </div>#}
-                    {#<div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>
-                    <div class="card-tricks">
-                    
-                    </div>#}
                 </div>
-                <button id="showMoreButton">Afficher plus</button>
+                <button class="uk-button uk-button-default" id="showMoreButton">Afficher plus</button>
 
                 <div class="bloc-chevron uk-animation-slide-bottom-medium">
                     <div class="chevron-up chevron">
