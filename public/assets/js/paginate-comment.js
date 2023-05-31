@@ -58,11 +58,15 @@ function displayComments(pageNumber) {
   
   // Afficher les commentaires de la page actuelle
   commentsToShow.forEach(comment => {
-    
+
+      //j'apelle ma fonction pour formater ma date
+      let date = formatDate(comment.createdAt.date)
+
       //On genere html qui sera afficher 
-      let commentHTML = generateCommentHTML(comment.user, comment.createdAt, comment.comment, userConnected, idUserConnected, comment.commentIdUser, comment.idComment);
+      let commentHTML = generateCommentHTML(comment.user, date, comment.comment, userConnected, idUserConnected, comment.commentIdUser, comment.idComment);
       let commentDiv = document.createElement('div');
       commentDiv.className = "bloc-card-comment-"+ comment.idComment
+      commentDiv.classList.add('card-com')
       commentDiv.innerHTML = commentHTML;
       containerComment.appendChild(commentDiv);
     
@@ -94,23 +98,34 @@ generatePaginationLinks();
 
 // Afficher les commentaires de la première page initialement
 displayComments(1);
-
-  
   
 })
 .catch(error => {
   console.error('Erreur :', error);
 });
 
-
+//Fonction pour formater les dates 
+function formatDate(dateString) {
+  const dateObject = new Date(dateString);
+  
+  const day = dateObject.getDate();
+  const month = dateObject.getMonth() + 1;
+  const year = dateObject.getFullYear();
+  const hours = dateObject.getHours();
+  const minutes = dateObject.getMinutes();
+  
+  const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+  
+  return formattedDate;
+}
 
 
 function generateCommentHTML(username, date, comment, isConnected, idUserConnected, commentIdUser, idComment ) {
   let htmlGenerateWithData =
     `<div class="card-comment">
       <div class="card-comment-header">
-          <h3>Auteur : <b>${username}</b> </h3>
-          <p> posté le : <em>${date}</em></p>
+          <h3>Posté par : <b>${username}</b> </h3>
+          <p> Posté le : <em>${date}</em></p>
       </div>
       <hr>
       <div class="card-comment-body">
@@ -119,12 +134,13 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
       </div>
     </div>`;
 
+    console.log(date);
 
     if(isConnected && idUserConnected === commentIdUser) {
       htmlGenerateWithData += `
       <div class="card-comment-actions">
 
-        <a href="#" uk-icon="icon: trash" class="delete-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-delete-comment${idComment}'></a>
+        <a href="#" uk-icon="icon: trash; ratio: 2" style="background-color : #f0506e; color: black" class="delete-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-delete-comment${idComment}'></a>
         <div id="my-id-delete-comment${idComment}" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
               <p>Voulez-vous vraiment supprimer le commentaire : <strong>${comment}</strong> </p>
@@ -134,7 +150,7 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
         </div>
 
 
-        <a href="#" uk-icon="icon: pencil" onClick="updateCommentWithoutRefresh(${idComment})" class="update-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-update-comment${idComment}'"></a>
+        <a href="#" uk-icon="icon: pencil; ratio: 2" style="background-color : #1e87f0; color: black"  onClick="updateCommentWithoutRefresh(${idComment})" class="update-comment" data-comment-id="${idComment}" uk-toggle='target: #my-id-update-comment${idComment}'"></a>
         <div id="my-id-update-comment${idComment}" uk-modal>
           <div class="uk-modal-dialog uk-modal-body">
               <p> Modifier mon commentaire </p>

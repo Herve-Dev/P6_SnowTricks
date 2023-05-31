@@ -1,14 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_tricks_interaction.html.twig' %}
 
 {% block title %}{{tricksSelected.TricksName}}{% endblock %}
+
 
 {% block body %} 
 
     <div class="container-main">
 
-        <div class="v-slider-bloc bloc-1 read-bloc-1">
+        {#<div class="v-slider-bloc bloc-1 read-bloc-1">
 
             <div class="bloc-item-tricks-1">
+
+                
 
                 <div class="bloc-img-first uk-inline">
                     {% for media in tricksSelected.MediaTricks %}
@@ -69,11 +72,11 @@
                     </div>
                 </div>
                 
-            </div>
+            </div>#}
 
-        </div>
         
-        <div class="v-slider-bloc bloc-2" id="bloc-comment">
+        
+        {#<div class="v-slider-bloc bloc-2" id="bloc-comment">
         {% if app.user %}
             <div class="bloc-form-comment">
                 {{ form_start(commentForm, {'attr': {'class':'uk-form-horizontal form-comment'}}) }}
@@ -87,11 +90,11 @@
                     <a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter</a>
                 </p>
             </div>
-        {% endif %}
+        {% endif %}#}
         
             
 
-            <div class="bloc-comment">
+            {#<div class="bloc-comment">
 
                 {#{% for comment in commentPaginate.data %}
                     <div class="card-comment">
@@ -108,19 +111,125 @@
                 {% endfor %}#}
 
                 
-            </div>
+            {#</div>
             <div id="containerPagination"></div>
                 {#{% set path = 'tricks_read_tricks' %}
                 {% set id_tricks = tricksSelected.id %}
                 {% set pages = commentPaginate.pages %}
                 {% set currentPage = commentPaginate.page %}
-                {% include "_partials/_pagination.html.twig" %}#}
-        </div>
+                {% include "_partials/_pagination.html.twig" %}
+        </div>#}
     
+        <section class="header-read-tricks">
+
+            <article class="bloc-media-tricks">
+                <div class="main-img-tricks uk-inline">
+                    {% for media in tricksSelected.MediaTricks %}
+                        {% if loop.first %}
+                            <img src="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" alt="">
+                            <div class="uk-overlay uk-dark uk-position-center">
+                                <p class="uk-text-secondary">{{ tricksSelected.TricksName }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="bloc-carousel-tricks">
+                    <div class="slider">
+                        {% for media in tricksSelected.MediaTricks %}
+                            <div class="slide">
+                                <a class="uk-inline" href="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" data-caption="Caption 1">
+                                    <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" width="200" height="100" alt="">
+                                </a>
+                            </div>
+                        {% endfor %}
+                        <div class="slide">
+                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
+                        </div>
+
+                        <div class="slide">
+                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
+                        </div>
+
+                        <div class="slide">
+                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
+                        </div>
+
+                        <div class="slide">
+                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
+                        </div>
+                    </div>
+                    <div class="uk-position-center-left" id="btn-prev">
+                        <a href="" uk-icon="icon: chevron-left; ratio: 3" style="color: white"></a>
+                    </div>
+
+                    <div class="uk-position-center-right" id="btn-next">
+                        <a href="" uk-icon="icon: chevron-right; ratio: 3" style="color: white"></a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="bloc-description-tricks">
+                <div class="container-article-tricks">
+                    <article class="uk-article">
+
+                        <h1 class="uk-article-title">{{tricksSelected.TricksName}}</h1>
+
+                        <p class="uk-article-meta">Ecrit par
+                            <b><a href="#">{{ tricksSelected.User.Username }}</a></b>
+                            le <b>{{ tricksSelected.TricksCreatedAt | date("d/m/y H:i") }}</b> Catégorie
+                            <b><a href="#">{{tricksSelected.category.categoryTricks}}</a></b>
+                        </p>
+
+                        <p>{{ tricksSelected.TricksDescription }}</p>
+
+                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                            <div>
+                                <a class="uk-button uk-button-text" href="#">Lire plus</a>
+                            </div>
+                            <div>
+                                <a class="uk-button uk-button-text" href="#target-footer">il y'a {{ tricksSelected.Comment | length }} commentaires</a>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </article>
+
+              
+        </section>
+
+        <section class="bloc-add-comment">
+            {% if app.user %}
+                <div class="bloc-form-comment">
+                    {{ form_start(commentForm, {'attr': {'class':'uk-form-horizontal form-comment'}}) }}
+                    {{form_row(commentForm.comment_tricks)}}
+                    <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
+                    {{ form_end(commentForm) }}
+                </div>
+            {% else %}
+                <div class="bloc-form-comment">
+                    <p uk-margin>
+                        <a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter <br> pour rajouter un commentaire</a>
+                        <hr>
+
+                    </p>
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="container-comment">
+            <div class="bloc-comment"></div>
+            <div id="containerPagination"></div>
+        </section>
     </div>
+
 
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/paginate-comment.js') }}" defer></script>
+    <script src="{{ asset('assets/js/slide-read-tricks.js') }}" defer></script>
+    
+
 {% endblock %}

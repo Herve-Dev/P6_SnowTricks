@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100;200;300;400;500;600;700;800;900;1000&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     position: absolute;
     width: 100%;
@@ -321,6 +325,7 @@ nav {
 .form-comment {
     display: flex;
     padding: 10px;
+    border: solid 3px black;
 }
 
 textarea {
@@ -336,10 +341,43 @@ textarea {
     width: 100%;
     height: 100%;
     border: solid 2px blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-comment {
     border: solid 3px green;
+    width: 100%;
+}
+
+.card-com {
+    border: solid 3px blueviolet;
+    width: 70%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.card-comment-actions {
+    border: solid 2px black;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#containerPagination {
+    display: flex;
+    justify-content: center;
+}
+
+#containerPagination a {
+    font-size: 26px;
+    padding: 0 10px;
+    border-radius: 50%;
+    border: solid 1px #1e87f0;
+    color: #1e87f0;
+    margin:  0 2px;
+    
 }
 
 p {
@@ -390,6 +428,101 @@ p {
     width: 100%;
     height: 100%;
 }
+
+
+/**** style media read tricks *****/
+
+
+.header-read-tricks {
+    border: solid 3px red;
+    width: 100%;
+    display: flex;
+    /*align-items: center;
+    flex-direction: column;*/
+}
+
+.bloc-media-tricks {
+    border: solid 5px brown;
+    width: 50%;
+}
+
+.main-img-tricks {
+    display: flex;
+    justify-content: center;
+    border: solid 3px purple;
+    width: 100%;
+    height: 50vh
+}
+
+.main-img-tricks img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bloc-carousel-tricks {
+    border: solid 3px green;
+    width: 100%;
+    height: 30vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.slider {
+    display: flex;
+    border: solid 3px blue;
+    position: absolute;
+    justify-content: center;
+}
+
+.slide {
+    border: solid 3px purple;
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    float: left;
+}
+
+#btn-prev, #btn-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    background: rgba( 27, 20, 100, 0.8 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+}
+/*****style description read tricks******/
+.bloc-description-tricks {
+    border: solid 3px yellowgreen;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-article-tricks {
+    border: solid 3px blue;
+    width: 90%;
+    height: 90%;
+    padding: 10px;
+}
+
+/******style bloc add comment*******/
+.bloc-add-comment {
+    border: solid 3px purple;
+}
+
+
+
+
+
+
+
 
 
 
