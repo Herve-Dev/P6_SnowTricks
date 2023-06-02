@@ -43,6 +43,7 @@ li {
     height: auto;
     display: flex;
     flex-direction: column;
+    background-color: #222;
 }
 
 .chevron {
@@ -153,14 +154,6 @@ li {
     color: white;
 }
 
-nav {
-    z-index: 10;
-    background: rgba( 255, 255, 255, 0 );
-    backdrop-filter: blur( 1px );
-    -webkit-backdrop-filter: blur( 1px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-}
-
 .link-nav {
     color: white;
 }
@@ -173,11 +166,16 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    border: solid 5px green;
     width: 90%;
-    height: 90%;
     flex-grow: 1;
     overflow-y: hidden;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+}
+
+nav {
+    z-index: 10;
 }
 
 
@@ -188,24 +186,25 @@ nav {
 }
 
 .card-tricks {
+    box-shadow: 0px 2px 8px 5px rgba(0,0,0,0.27);
+    border-radius: 20px 20px 0 0;
     display: flex;
     flex-direction: column;
-    border: solid 2px purple;
     width: 450px;
-    height: 280px;
-    margin: 5px;
+    height: 270px;
+    margin: 15px;
 }
 
 .card-tricks-body {
-    border: solid 2px blue;
+    border-radius: 20px 20px 0 0;
     width: 100%;
     height: 80%;
 }
 
 .card-tricks-footer {
-    border: solid 2px red;
     width: 100%;
     height: 100%;
+    background: rgba( 74, 144, 226, 0.65 );
 }
 
 .container-register-login {
@@ -227,12 +226,23 @@ nav {
 }
 
 .bloc_update_image {
+    flex-wrap: wrap;
+    display: flex;
     border: solid 2px green;
-    width: 250px; 
+    width: 100%; 
+    list-style: none;
 }
 
-.bloc_update_image li {
+.bloc_update_video {
+    display: flex;
+    border: solid 2px green;
+    width: 100%;
     list-style: none;
+}
+
+.bloc_update_video li {
+    display: flex;
+    flex-direction: column;
 }
 
 .bloc_update_image img {
@@ -319,13 +329,13 @@ nav {
 .bloc-form-comment {
     display: flex;
     justify-content: center;
-    border: solid 3px purple;
+    padding: 10px;
+    margin-top: 50px;
 }
 
 .form-comment {
     display: flex;
     padding: 10px;
-    border: solid 3px black;
 }
 
 textarea {
@@ -340,7 +350,6 @@ textarea {
 .bloc-comment {
     width: 100%;
     height: 100%;
-    border: solid 2px blue;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -348,19 +357,16 @@ textarea {
 }
 
 .card-comment {
-    border: solid 3px green;
     width: 100%;
 }
 
 .card-com {
-    border: solid 3px blueviolet;
     width: 70%;
     margin: 10px;
     padding: 10px;
 }
 
 .card-comment-actions {
-    border: solid 2px black;
     display: flex;
     justify-content: flex-end;
 }
@@ -425,6 +431,7 @@ p {
 }
 
 .img-slideshow {
+    border-radius: 20px 20px 0 0;
     width: 100%;
     height: 100%;
 }
@@ -434,22 +441,20 @@ p {
 
 
 .header-read-tricks {
-    border: solid 3px red;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     /*align-items: center;
     flex-direction: column;*/
 }
 
 .bloc-media-tricks {
-    border: solid 5px brown;
     width: 50%;
 }
 
 .main-img-tricks {
     display: flex;
     justify-content: center;
-    border: solid 3px purple;
     width: 100%;
     height: 50vh
 }
@@ -461,23 +466,22 @@ p {
 }
 
 .bloc-carousel-tricks {
-    border: solid 3px green;
     width: 100%;
     height: 30vh;
     position: relative;
     overflow: hidden;
     display: flex;
+    background-color: #1e87f0;
 }
 
 .slider {
     display: flex;
-    border: solid 3px blue;
     position: absolute;
     justify-content: center;
 }
 
+
 .slide {
-    border: solid 3px purple;
     width: 200px;
     height: 200px;
     margin: 5px;
@@ -498,7 +502,6 @@ p {
 }
 /*****style description read tricks******/
 .bloc-description-tricks {
-    border: solid 3px yellowgreen;
     width: 50%;
     display: flex;
     justify-content: center;
@@ -506,16 +509,23 @@ p {
 }
 
 .container-article-tricks {
-    border: solid 3px blue;
     width: 90%;
-    height: 90%;
-    padding: 10px;
+    height: auto;
 }
 
 /******style bloc add comment*******/
-.bloc-add-comment {
-    border: solid 3px purple;
+
+
+
+/*** style update form*****/
+
+.bloc-btn-new-add {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
 }
+
 
 
 

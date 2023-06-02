@@ -43,42 +43,25 @@ class TricksController extends AbstractController
         $commentForm = $this->createForm(CommentFormType::class, $comment);
         $commentForm->handleRequest($request);
 
-        //On va chercher le numero de page dans l'url
-        $page = $request->query->getInt('page', 1);
-
-        // Pagination de mes commentaires
-        //$commentPaginate = $commentRepository->findCommentsPaginated($page, $tricksSelected->getId(), 2);
-        $datasFound = $commentRepository->findBy(['tricks' => $id]);
-        
-
-        
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             
-
             $user = $this->getUser();
-            dump($user);
 
             //On stock l'id de l'utilisateur dans le commentaire
             $comment->setUser($user);
-
             $comment->setTricks($tricksSelected);
-
-            //A mettre dans un service
-            $currentDate = new \DateTimeImmutable('NOW', new DateTimeZone('Europe/Paris'));
-            dump($currentDate->format('d-m-Y H:i:s'));
 
             $comment->setCommentCreatedAt(new \DateTimeImmutable('NOW', new DateTimeZone('Europe/Paris')));
 
             $em->persist($comment);
             $em->flush();
-            
+
             return $this->redirectToRoute('tricks_read_tricks', ['id' => $tricksSelected->getId()]);
         }
 
         return $this->render('tricks/read.html.twig', [
             'tricksSelected' => $tricksSelected,
             'commentForm' => $commentForm->createView(),
-            //'commentPaginate' => $commentPaginate,
         ] );
     }
 
@@ -123,17 +106,15 @@ class TricksController extends AbstractController
         if ($tricksForm->isSubmitted() && $tricksForm->isValid()) {
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
-            dump($mediaTricks);
 
+            //On récupère les url video
             $videoTricks = $tricksForm->get('video_tricks')->getData();
-            dump($videoTricks);
             
             if ($videoTricks) {
                 foreach($videoTricks as $videoTrick)
                 {
                     
                     //IMPORTANT FAIRE UNE VERIFICATION DES LIENS PARTAGER ('youtube', 'daylimotion' ...)
-                    dump(str_replace('/watch?v=', '/embed/', $videoTrick));
                     $url = str_replace('/watch?v=', '/embed/', $videoTrick);
                     $videoEntity = new VideoTricks();
                     $videoEntity->setVideoUrl($url);
@@ -142,13 +123,9 @@ class TricksController extends AbstractController
             }
           
             foreach($mediaTricks as $mediaTrick) {
-
-                dump($mediaTrick);
                 
                 //On définit le dossier de destination
                 $folder = "media_tricks";
-                
-                
                 
                 //On appelle le service d'ajout
                 $file = $pictureService->add($mediaTrick,$folder, 300, 300);
@@ -188,6 +165,20 @@ class TricksController extends AbstractController
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
 
+            //On récupère les url video
+            $videoTricks = $tricksForm->get('video_tricks')->getData();
+
+            if ($videoTricks) {
+                foreach($videoTricks as $videoTrick)
+                {
+                    //IMPORTANT FAIRE UNE VERIFICATION DES LIENS PARTAGER ('youtube', 'daylimotion' ...)
+                    $url = str_replace('/watch?v=', '/embed/', $videoTrick);
+                    $videoEntity = new VideoTricks();
+                    $videoEntity->setVideoUrl($url);
+                    $tricks->addVideoTrick($videoEntity);
+                }
+            }
+
             foreach($mediaTricks as $mediaTrick) {
                 //On définit le dossier de destination
                 $folder = "media_tricks";
@@ -206,7 +197,7 @@ class TricksController extends AbstractController
             $em->flush();
             
             //On envoie un message flash 
-            $this->addFlash('success','tricks ajouté avec succès');
+            $this->addFlash('success','tricks mis à jour avec succès');
 
             //On redirige 
             return $this->redirectToRoute('main');
@@ -242,6 +233,14 @@ class TricksController extends AbstractController
             return new JsonResponse(['error' => 'Erreur de suppression', $mediaName], 400);
         }
         
+        return new JsonResponse(['error' => 'Token invalide'], 400);
+    }
+
+
+    #[Route('/delete/video/{id}', name: 'delete_video', methods: ['DELETE'])]
+    public function deleteVideo(MediaTricks $mediaTrick ,Request $request, EntityManagerInterface $em, PictureService $pictureService): JsonResponse
+    {
+
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 

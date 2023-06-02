@@ -1,9 +1,9 @@
 // Sélectionnez les éléments HTML pertinents
-const container = document.getElementById('media-container');
-const addButton = document.querySelector('.add-media');
+const container = document.getElementById('container-media-update');
+const addButton = document.querySelector('.add-new-media');
 
 // Compteur pour générer des index uniques
-let index = container.querySelectorAll('.media').length;
+let index = container.querySelectorAll('.media-new-add').length;
 
 // Ajoutez un gestionnaire d'événements au bouton "Ajouter un média"
 addButton.addEventListener('click', () => {
@@ -18,6 +18,7 @@ addButton.addEventListener('click', () => {
     const btnDelete = document.createElement('button');
     btnDelete.classList.add('delete-media');
     btnDelete.classList.add('uk-button');
+    btnDelete.classList.add('uk-button-danger');
     btnDelete.textContent = 'Suppirmer cette photo' 
 
     newElement.appendChild(btnDelete)
@@ -35,11 +36,17 @@ container.addEventListener('click', (event) => {
 });
 
 
-const containerVideo = document.getElementById('video-container');
-const addVideoButton = document.querySelector('.add-video');
+
+
+
+
+
+
+const containerVideo = document.getElementById('container-video-update');
+const addVideoButton = document.querySelector('.add-new-video');
 
 // Compteur pour générer des index uniques
-let indexVideoForm = container.querySelectorAll('.video_form').length;
+let indexVideoForm = container.querySelectorAll('.media-new-video').length;
 
 // Ajoutez un gestionnaire d'événements au bouton "Ajouter un média"
 addVideoButton.addEventListener('click', () => {
@@ -53,6 +60,8 @@ addVideoButton.addEventListener('click', () => {
 
     const btnDelete = document.createElement('button');
     btnDelete.classList.add('delete-url');
+    btnDelete.classList.add('uk-button-danger');
+    btnDelete.classList.add('uk-button');
     btnDelete.textContent = 'Suppirmer cette url' 
 
     newElement.appendChild(btnDelete)
@@ -68,7 +77,3 @@ container.addEventListener('click', (event) => {
         event.target.closest('.video_form').remove();
     }
 });
-
-
-
-

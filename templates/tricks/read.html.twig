@@ -137,27 +137,21 @@
                 <div class="bloc-carousel-tricks">
                     <div class="slider">
                         {% for media in tricksSelected.MediaTricks %}
-                            <div class="slide">
+                            <div class="slide" uk-lightbox>
                                 <a class="uk-inline" href="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" data-caption="Caption 1">
                                     <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" width="200" height="100" alt="">
                                 </a>
                             </div>
                         {% endfor %}
-                        <div class="slide">
-                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
-                        </div>
-
-                        <div class="slide">
-                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
-                        </div>
-
-                        <div class="slide">
-                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
-                        </div>
-
-                        <div class="slide">
-                            <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-76b66cac48b7041414110b5d6807161e.webp') }}" width="200" height="100" alt="">
-                        </div>
+                        {% if tricksSelected.VideoTricks %}
+                            {% for video in tricksSelected.VideoTricks %}
+                                <div class="slide" uk-lightbox>
+                                    <a class="uk-inline" href={{video.videoUrl}} data-caption="Caption 1">
+                                        <iframe src={{video.videoUrl}} frameborder="0" width="200" height="200"></iframe>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="uk-position-center-left" id="btn-prev">
                         <a href="" uk-icon="icon: chevron-left; ratio: 3" style="color: white"></a>
@@ -212,7 +206,6 @@
                     <p uk-margin>
                         <a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter <br> pour rajouter un commentaire</a>
                         <hr>
-
                     </p>
                 </div>
             {% endif %}

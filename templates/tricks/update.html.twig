@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_tricks_interaction.html.twig' %}
 
 {% block title %}Modifier mon tricks{% endblock %}
 
@@ -8,7 +8,31 @@
         {{ form_row(tricksForm.tricks_name) }}
         {{ form_row(tricksForm.tricks_description) }}
         {{ form_row(tricksForm.category) }}
-        {{ form_row(tricksForm.media_tricks) }}
+
+        <div>
+            <div id="container-media-update" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
+            {% for mediaForm in tricksForm.media_tricks %}
+                <div class="media-new-add">
+                    {{ form_row(mediaForm) }}
+                </div>
+            {% endfor %}
+            </div>
+
+            <div id="container-video-update" data-prototype="{{ form_row(tricksForm.video_tricks.vars.prototype)|e }}">
+                {% for videoForm in tricksForm.video_tricks %}
+                    <div class="media-new-video">
+                        {{ form_row(videoForm) }}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="bloc-btn-new-add">
+            <button type="button" class="add-new-media uk-button uk-button-primary">Ajouter un média</button><br>
+            <button type="button" class="add-new-video uk-button uk-button-primary">Ajouter une vidéo</button>
+        </div>
+       
         <ul class="bloc_update_image">
             {% for media in tricks.mediaTricks %}
                 <li>
@@ -17,6 +41,15 @@
                 </li>
             {% endfor %}
         </ul>
+        <ul class="bloc_update_video">
+            {% for url in tricks.VideoTricks %}
+                <li>
+                    <iframe src={{url.videoUrl}} frameborder="0"></iframe>
+                    <a href="{{ path('tricks_delete_video', {id: url.id}) }}">supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+        
             
         <button class="uk-button uk-button-primary" type="submit">
             Modifier mon tricks
@@ -28,4 +61,5 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/js/delete-picture.js') }}" defer></script>
+    <script src="{{ asset('assets/js/update-nested-form.js') }}" defer></script>
 {% endblock %}
