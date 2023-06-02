@@ -238,9 +238,23 @@ class TricksController extends AbstractController
 
 
     #[Route('/delete/video/{id}', name: 'delete_video', methods: ['DELETE'])]
-    public function deleteVideo(MediaTricks $mediaTrick ,Request $request, EntityManagerInterface $em, PictureService $pictureService): JsonResponse
+    public function deleteVideo(VideoTricks $videoTricks ,Request $request, EntityManagerInterface $em): JsonResponse
     {
+        
+        //On récupère le contenu de la requête
+        $data = json_decode($request->getContent(), true);
 
+        if ($this->isCsrfTokenValid('delete' . $videoTricks->getId(), $data['_token'])) {
+            // Le token csrf est valide 
+
+            // On supprime la video de la base de données
+            $em->remove($videoTricks);
+            $em->flush();
+
+            return new JsonResponse(['success' => true], 200);
+        }
+
+        
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 

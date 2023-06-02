@@ -230,7 +230,19 @@ nav {
     display: flex;
     border: solid 2px green;
     width: 100%; 
+    height: auto;
     list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.bloc_update_image li {
+    border: solid 2px blueviolet;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
 }
 
 .bloc_update_video {
@@ -238,6 +250,12 @@ nav {
     border: solid 2px green;
     width: 100%;
     list-style: none;
+    padding: 0;
+}
+
+.bloc_update_video li {
+    flex-wrap: wrap;
+    margin: 30px;
 }
 
 .bloc_update_video li {

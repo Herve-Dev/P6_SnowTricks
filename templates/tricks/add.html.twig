@@ -21,9 +21,6 @@
             {{ form_label(tricksForm.category) }}
             {{ form_widget(tricksForm.category) }}
         </div>
-                
-        {#<div id="mediaTricksContainer"></div>
-        <button type="button" data-index="{{ tricksForm.media_tricks|length }}" id="add-media-button">Ajouter un fichier</button>#}
 
         <div id="media-container" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
         {% for mediaForm in tricksForm.media_tricks %}
