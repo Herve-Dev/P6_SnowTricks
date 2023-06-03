@@ -16,7 +16,7 @@
             <div class="bloc-item-main-1">
                 <div id="bloc-tagline">
                     <div id="tagline" class="uk-card-body">
-                        <h2 class="uk-heading-small ">Découvrez les astuces des pros et partagez</h2>
+                       <h2 class="uk-heading-small ">Découvrez les astuces des pros et partagez</h2>
                         <h2 class=" uk-heading-small">les vôtres avec notre communauté</h2>
                     </div>
                     <p uk-margin>
@@ -56,12 +56,12 @@
                                         {% endif %}
 
                                     </ul>
-                                    <a class="uk-position-center-left uk-position-small uk-hidden-hover " href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-                                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                                    <a class="uk-position-center-left uk-position-small uk-overlay uk-dark " href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                                    <a class="uk-position-center-right uk-position-small uk-overlay uk-dark" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
                                 </div>
                             </div>
                             <div class="card-tricks-footer">
-                               <b><a class="uk-button" style="color: black" href="{{ path('tricks_read_tricks', {id: trick.id}) }}">{{trick.tricksName}}</a></b>
+                               <b><a class="uk-button" href="{{ path('tricks_read_tricks', {id: trick.id}) }}">{{trick.tricksName}}</a></b>
                                 {% if app.user %}
                                     {% if app.user.id == trick.user.id %}
                                         <a href="{{ path('tricks_update_tricks', {id: trick.id}) }}" uk-icon="icon: pencil"></a>

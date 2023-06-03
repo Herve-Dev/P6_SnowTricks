@@ -21,10 +21,16 @@ class TricksFormType extends AbstractType
     {
         $builder
             ->add('tricks_name', options: [
-                'label' =>  'Nom du tricks :'
+                'label' =>  'Nom du tricks :',
+                'attr' => [
+                    'class' => 'uk-input'
+                ]
             ])
             ->add('tricks_description', options: [
-                'label' => 'Description :'
+                'label' => 'Description :',
+                'attr' => [
+                    'class' => 'uk-textarea desc-update'
+                ]
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,

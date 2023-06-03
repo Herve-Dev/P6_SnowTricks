@@ -25,6 +25,11 @@ li {
     height: auto;
 }
 
+.main-read{
+    background: rgb(57,140,207);
+    background: radial-gradient(circle, rgba(57,140,207,0.5551470588235294) 28%, rgba(255,255,255,0.4515056022408963) 100%);
+}
+
 .v-slider-bloc {
     border: solid 1px black;
     font-size: 30px;
@@ -43,7 +48,6 @@ li {
     height: auto;
     display: flex;
     flex-direction: column;
-    background-color: #222;
 }
 
 .chevron {
@@ -105,7 +109,6 @@ li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid 2px blue;
     width: 100%;
     height: 100vh; 
 }
@@ -121,7 +124,7 @@ li {
 #bloc-tagline {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
     height: 90vh;
 }
@@ -146,7 +149,11 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    display: flex;
+    justify-content: center;
 }
+
+
 
 #tagline h2 {
     margin: 5px;
@@ -169,15 +176,14 @@ li {
     width: 90%;
     flex-grow: 1;
     overflow-y: hidden;
-    background-color: white;
     margin-top: 10px;
     border-radius: 30px;
+    background-color:#0777ff
 }
 
 nav {
     z-index: 10;
 }
-
 
 
 #showMoreButton {
@@ -193,6 +199,7 @@ nav {
     width: 450px;
     height: 270px;
     margin: 15px;
+    border-radius: 20px;
 }
 
 .card-tricks-body {
@@ -204,7 +211,8 @@ nav {
 .card-tricks-footer {
     width: 100%;
     height: 100%;
-    background: rgba( 74, 144, 226, 0.65 );
+    background-color: white;
+    border-radius: 0 0 20px 20px;
 }
 
 .container-register-login {
@@ -228,40 +236,53 @@ nav {
 .bloc_update_image {
     flex-wrap: wrap;
     display: flex;
-    border: solid 2px green;
     width: 100%; 
     height: auto;
+    padding: 20px;
     list-style: none;
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin: 0;
 }
 
 .bloc_update_image li {
-    border: solid 2px blueviolet;
     width: 200px;
     height: 200px;
     margin: 30px;
+    padding: 0;
+    border-radius: 20px;
 }
+
+.bloc_update_image li a {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.bloc_update_image li img {
+    padding: 0;
+    border-radius: 20px;
+}
+
 
 .bloc_update_video {
     display: flex;
-    border: solid 2px green;
+    flex-wrap: wrap;
     width: 100%;
     list-style: none;
     padding: 0;
-}
-
-.bloc_update_video li {
-    flex-wrap: wrap;
-    margin: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
 .bloc_update_video li {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    margin: 30px;
+    list-style: none;
 }
+
 
 .bloc_update_image img {
     padding: 10px;
@@ -361,6 +382,10 @@ textarea {
     min-width: 50vh;
 }
 
+.desc-update {
+    height: 200px;
+}
+
 .btn-comment {
     border: solid 2px black;
 }
@@ -382,6 +407,9 @@ textarea {
     width: 70%;
     margin: 10px;
     padding: 10px;
+    border: solid 2px white;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .card-comment-actions {
@@ -415,7 +443,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba( 74, 144, 226, 0.65 );
+    background-color: #0777ff;
 }
 
 .form-add-tricks {
@@ -454,6 +482,21 @@ p {
     height: 100%;
 }
 
+.form-update {
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: white;
+}
+.container-form-update{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(57,140,207);
+    background: radial-gradient(circle, rgba(57,140,207,0.5551470588235294) 28%, rgba(255,255,255,0.4515056022408963) 100%);
+}
 
 /**** style media read tricks *****/
 
@@ -480,7 +523,7 @@ p {
 .main-img-tricks img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .bloc-carousel-tricks {
@@ -489,7 +532,6 @@ p {
     position: relative;
     overflow: hidden;
     display: flex;
-    background-color: #1e87f0;
 }
 
 .slider {
@@ -544,6 +586,9 @@ p {
     width: 200px;
 }
 
+.uk-slideshow-items {
+    border-radius: 20px 20px 0 0;
+}
 
 
 
