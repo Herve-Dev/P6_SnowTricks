@@ -1,115 +1,150 @@
 {% extends 'base_tricks_interaction.html.twig' %}
 
-{% block title %}{{tricksSelected.TricksName}}{% endblock %}
+{% block title %}
+	{{tricksSelected.TricksName}}
+{% endblock %}
 
 
-{% block body %} 
+{% block body %}
 
-    <div class="container-main main-read">
-    
-        <section class="header-read-tricks">
+	<div class="container-main main-read">
 
-            <article class="bloc-media-tricks">
-                <div class="main-img-tricks uk-inline">
-                    {% for media in tricksSelected.MediaTricks %}
-                        {% if loop.first %}
-                            <img src="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" alt="">
-                            <div class="uk-overlay uk-dark uk-position-center">
-                                <p class="uk-text-secondary">{{ tricksSelected.TricksName }}</p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+		<section class="header-read-tricks">
 
-                <div class="bloc-carousel-tricks">
-                    <div class="slider">
-                        {% for media in tricksSelected.MediaTricks %}
-                            <div class="slide" uk-lightbox>
-                                <a class="uk-inline" href="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" data-caption="Caption 1">
-                                    <img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" width="200" height="100" alt="">
-                                </a>
-                            </div>
-                        {% endfor %}
-                        {% if tricksSelected.VideoTricks %}
-                            {% for video in tricksSelected.VideoTricks %}
-                                <div class="slide" uk-lightbox>
-                                    <a class="uk-inline" href={{video.videoUrl}} data-caption="Caption 1">
-                                        <iframe src={{video.videoUrl}} frameborder="0" width="200" height="200"></iframe>
-                                    </a>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="uk-position-center-left" id="btn-prev">
-                        <a href="" uk-icon="icon: chevron-left; ratio: 3" style="color: white"></a>
-                    </div>
+			<article class="bloc-media-tricks">
+				<div class="main-img-tricks uk-inline">
+					{% for media in tricksSelected.MediaTricks %}
+						{% if loop.first %}
+							<img src="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" alt="">
+							<div class="uk-overlay uk-light uk-position-center">
+								<p class="uk-text-secondary">{{ tricksSelected.TricksName }}</p>
+							</div>
+							{% if app.user %}
+								{% if app.user.id == tricksSelected.user.id %}
+									<div class="bloc-btn-media uk-overlay uk-light uk-position-top-right">
+										<div class="media-btn-upd">
+											<a href="{{ path('tricks_update_tricks', {id: tricksSelected.id}) }}" uk-icon="icon: pencil"></a>
+										</div>
 
-                    <div class="uk-position-center-right" id="btn-next">
-                        <a href="" uk-icon="icon: chevron-right; ratio: 3" style="color: white"></a>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="bloc-description-tricks">
-                <div class="container-article-tricks">
-                    <article class="uk-article">
+										<div class="media-btn-del">
+											<a href="" uk-icon="icon: trash" uk-toggle="{{'target: #my-id-' ~ tricksSelected.id }}"></a>
+										</div>
 
-                        <h1 class="uk-article-title">{{tricksSelected.TricksName}}</h1>
+										<div id="{{'my-id-' ~ tricksSelected.id}}" uk-modal>
+											<div class="uk-modal-dialog uk-modal-body">
+												<p>Voulez-vous vraiment supprimer le tricks :
+													<strong>{{tricksSelected.tricksName}}</strong>
+												</p>
+												<a class="uk-button uk-button-default uk-modal-close" href="#">Annuler</a>
+												<a class="uk-button uk-button-danger" href="{{ path('tricks_delete_tricks', {id: tricksSelected.id}) }}">Supprimer</a>
+											</div>
+										</div>
+									</div>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</div>
 
-                        <p class="uk-article-meta">Ecrit par
-                            <b><a href="#">{{ tricksSelected.User.Username }}</a></b>
-                            le <b>{{ tricksSelected.TricksCreatedAt | date("d/m/y H:i") }}</b> Catégorie
-                            <b><a href="#">{{tricksSelected.category.categoryTricks}}</a></b>
-                        </p>
+				<div class="bloc-carousel-tricks">
+					<div class="slider">
+						{% for media in tricksSelected.MediaTricks %}
+							<div class="slide" uk-lightbox>
+								<a class="uk-inline" href="{{ asset('assets/uploads/media_tricks/' ~ media.mediaName) }}" data-caption="Caption 1">
+									<img src="{{ asset('assets/uploads/media_tricks/mini/300x300-' ~ media.mediaName) }}" width="200" height="100" alt="">
+								</a>
+							</div>
+						{% endfor %}
+						{% if tricksSelected.VideoTricks %}
+							{% for video in tricksSelected.VideoTricks %}
+								<div class="slide" uk-lightbox>
+									<a class="uk-inline" href={{video.videoUrl}} data-caption="Caption 1">
+										<iframe src={{video.videoUrl}} frameborder="0" width="200" height="200"></iframe>
+									</a>
+								</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="uk-position-center-left" id="btn-prev">
+						<a href="" uk-icon="icon: chevron-left; ratio: 3" style="color: white"></a>
+					</div>
 
-                        <p>{{ tricksSelected.TricksDescription }}</p>
+					<div class="uk-position-center-right" id="btn-next">
+						<a href="" uk-icon="icon: chevron-right; ratio: 3" style="color: white"></a>
+					</div>
+				</div>
+			</article>
 
-                        <div class="uk-grid-small uk-child-width-auto" uk-grid>
-                            <div>
-                                <a class="uk-button uk-button-text" href="#">Lire plus</a>
-                            </div>
-                            <div>
-                                <a class="uk-button uk-button-text" href="#target-footer">il y'a {{ tricksSelected.Comment | length }} commentaires</a>
-                            </div>
-                        </div>
+			<article class="bloc-description-tricks">
+				<div class="container-article-tricks">
+					<article class="uk-article">
 
-                    </article>
-                </div>
-            </article>
+						<h1 class="uk-article-title">{{tricksSelected.TricksName}}</h1>
 
-              
-        </section>
+						<p class="uk-article-meta">Ecrit par
+							<b>
+								<a href="#">{{ tricksSelected.User.Username }}</a>
+							</b>
+							le
+							<b>{{ tricksSelected.TricksCreatedAt | date("d/m/y H:i") }}</b>
+							Catégorie
+							<b>
+								<a href="#">{{tricksSelected.category.categoryTricks}}</a>
+							</b>
+						</p>
 
-        <section class="bloc-add-comment">
-            {% if app.user %}
-                <div class="bloc-form-comment">
-                    {{ form_start(commentForm, {'attr': {'class':'uk-form-horizontal form-comment'}}) }}
-                    {{form_row(commentForm.comment_tricks)}}
-                    <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
-                    {{ form_end(commentForm) }}
-                </div>
-            {% else %}
-                <div class="bloc-form-comment">
-                    <p uk-margin>
-                        <a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter <br> pour rajouter un commentaire</a>
-                        <hr>
-                    </p>
-                </div>
-            {% endif %}
-        </section>
+						<p>{{ tricksSelected.TricksDescription }}</p>
 
-        <section class="container-comment">
-            <div class="bloc-comment"></div>
-            <div id="containerPagination"></div>
-        </section>
-    </div>
+						<div class="uk-grid-small uk-child-width-auto" uk-grid>
+							<div>
+								<a class="uk-button uk-button-text" href="#">Lire plus</a>
+							</div>
+							<div>
+								<a class="uk-button uk-button-text" href="#target-footer">il y'a
+									{{ tricksSelected.Comment | length }}
+									commentaires</a>
+							</div>
+						</div>
+
+					</article>
+				</div>
+			</article>
+
+
+		</section>
+
+		<section class="bloc-add-comment">
+			{% if app.user %}
+				<div class="bloc-form-comment">
+					{{ form_start(commentForm, {'attr': {'class':' form-comment'}}) }}
+					{{form_row(commentForm.comment_tricks)}}
+					<button type="submit" class="uk-button uk-button-primary">Ajouter</button>
+					{{ form_end(commentForm) }}
+				</div>
+			{% else %}
+				<div class="bloc-form-comment">
+					<p uk-margin>
+						<a class="uk-button uk-button-primary" href="{{ path('app_login') }}">Veuillez vous inscrire ou vous connecter
+							<br>
+							pour rajouter un commentaire</a>
+						<hr>
+					</p>
+				</div>
+			{% endif %}
+		</section>
+
+		<section class="container-comment">
+			<div class="bloc-comment"></div>
+			<div id="containerPagination"></div>
+		</section>
+	</div>
 
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/paginate-comment.js') }}" defer></script>
-    <script src="{{ asset('assets/js/slide-read-tricks.js') }}" defer></script>
-    
+	<script src="{{ asset('assets/js/paginate-comment.js') }}" defer></script>
+	<script src="{{ asset('assets/js/slide-read-tricks.js') }}" defer></script>
+
 
 {% endblock %}

@@ -13,6 +13,10 @@ body {
     height: 100vh;
 }
 
+p {
+    color: black;
+}
+
 .uk-navbar-right {
     margin-right: 30px;
 }
@@ -365,21 +369,30 @@ nav {
     margin: 20px;
 }
 
+.bloc-add-comment {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .bloc-form-comment {
     display: flex;
+    align-items: center;
     justify-content: center;
     padding: 10px;
-    margin-top: 50px;
+    width: 40%;
 }
 
 .form-comment {
     display: flex;
     padding: 10px;
+    width: 100%;
 }
 
-textarea {
+.form-comment textarea {
     resize: none;
-    min-width: 50vh;
+    width: 300px;
 }
 
 .desc-update {
@@ -520,6 +533,7 @@ p {
     height: 50vh
 }
 
+
 .main-img-tricks img {
     width: 100%;
     height: 100%;
@@ -614,6 +628,48 @@ p {
     margin-top: 10px;
 }
 
+/*****style flash msg******/
+.msg-flash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    z-index: 20;
+    position: absolute;
+    width: 70%;
+    top: 60px;
+}
+
+.msg-flash a {
+    width: 100%;
+    z-index: 20;
+}
+
+.bloc-btn-media {
+    display: flex;
+}
+
+.media-btn-upd {
+    margin: 5px;
+    padding: 10px;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.media-btn-del {
+    margin: 5px;
+    padding: 10px;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
 
 
 

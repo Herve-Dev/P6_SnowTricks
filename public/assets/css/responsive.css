@@ -23,11 +23,32 @@
     #video-desktop {
       display: flex;
       min-height:auto;
-    }
-    /*.main-img-mobile {
-        display: none;
-    }*/
+    }  
 }
+
+/*@media screen and (max-width: 1083px) {
+  .header-read-tricks {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bloc-carousel-tricks {
+    height: 250px;
+  }
+
+  .bloc-description-tricks {
+    width: 90%;
+  }
+
+  .bloc-media-tricks {
+    width: 90%;
+  }
+
+  .form-comment {
+    width: 100%;
+  }
+}*/
 
 /********* Responsive for desktop **********/
 @media screen and (max-width: 1270px) and (min-width: 1083px) {

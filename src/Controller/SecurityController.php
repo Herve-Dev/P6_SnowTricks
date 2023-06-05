@@ -62,7 +62,6 @@ class SecurityController extends AbstractController
                 
 
                 $url = $this->generateUrl('app_reset_password', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
-                //dd($url);
 
                 //On crée le mail
                 $context = compact('url','user');
