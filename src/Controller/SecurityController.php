@@ -54,10 +54,7 @@ class SecurityController extends AbstractController
             $user = $userRepository->findOneBy(['email' => $resetForm->get('email')->getData()] );
             $idUser = $user->getId();
 
-            if ($user) {
-                //On génère un token de reinitialisation
-                //$token = $tokenGeneratorInterface->generateToken();
-                
+            if ($user) {                
                 $token = $encrypt->encodeDataWithSignature($idUser, 'SECRET_SIGNATURE_DEMO');
                 
 

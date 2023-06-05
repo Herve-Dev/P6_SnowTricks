@@ -1,3 +1,9 @@
+
+//Désactiver le bouton si aucun média
+const btnAddTricks = document.querySelector('.btn-sub-tricks')
+btnAddTricks.disabled = true
+
+
 // Sélectionnez les éléments HTML pertinents
 const container = document.getElementById('media-container');
 const addButton = document.querySelector('.add-media');
@@ -15,6 +21,8 @@ addButton.addEventListener('click', () => {
     newElement.classList.add('media');
     newElement.innerHTML = newForm;
 
+    
+
     const btnDelete = document.createElement('button');
     btnDelete.classList.add('delete-media');
     btnDelete.classList.add('uk-button');
@@ -22,6 +30,12 @@ addButton.addEventListener('click', () => {
 
     newElement.appendChild(btnDelete)
     container.appendChild(newElement);
+
+    //Condition pour activer bouton submit
+    const inputMedia = document.querySelector('.media > div > input')
+    inputMedia.addEventListener('change', () => {
+        btnAddTricks.disabled = false
+    })
 
     // Incrémentez le compteur pour le prochain élément
     index++;
@@ -31,6 +45,12 @@ addButton.addEventListener('click', () => {
 container.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-media')) {
         event.target.closest('.media').remove();
+
+        //Désactiver bouton submit si media inexistant
+        const mediaExist = document.querySelector('.media');
+        if (mediaExist === null) {
+            btnAddTricks.disabled = true
+        }
     }
 });
 

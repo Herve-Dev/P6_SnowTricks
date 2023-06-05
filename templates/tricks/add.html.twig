@@ -6,6 +6,12 @@
 
 <div class="bloc-form-add-trick">
 
+    <div uk-alert class="notice-add">
+        <h3>Notice</h3>
+        <p>Une image minimum est obligatoire pour posté votre tricks</p>
+        <a class="uk-alert-close" uk-close></a>
+    </div>
+
     {{ form_start(tricksForm, {'attr' : {'class': 'form-add-tricks uk-box-shadow-medium uk-animation-slide-right-small'}}) }}
         <div class="bloc-trick-form">
             {{ form_label(tricksForm.tricks_name) }}
@@ -25,7 +31,7 @@
         <div id="media-container" data-prototype="{{ form_row(tricksForm.media_tricks.vars.prototype)|e }}">
         {% for mediaForm in tricksForm.media_tricks %}
             <div class="media">
-                {{ form_row(mediaForm) }}
+                {{ form_row(mediaForm, {'required': true}) }}
             </div>
         {% endfor %}
         </div>
@@ -46,7 +52,7 @@
             <button type="button" class="add-video uk-button">Ajouter une vidéo</button>
         </div>
 
-        <button class="uk-button uk-button-primary" type="submit">
+        <button class="uk-button uk-button-primary btn-sub-tricks" type="submit">
             Ajouter mon tricks
         </button>
     {{ form_end(tricksForm) }}

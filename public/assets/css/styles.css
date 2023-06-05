@@ -35,7 +35,6 @@ li {
 }
 
 .v-slider-bloc {
-    border: solid 1px black;
     font-size: 30px;
     display: flex;
     /*justify-content: center;
@@ -202,7 +201,7 @@ nav {
     flex-direction: column;
     width: 450px;
     height: 270px;
-    margin: 15px;
+    margin: 10px;
     border-radius: 20px;
 }
 
@@ -439,9 +438,9 @@ nav {
     font-size: 26px;
     padding: 0 10px;
     border-radius: 50%;
-    border: solid 1px #1e87f0;
-    color: #1e87f0;
-    margin:  0 2px;
+    border: solid 3px black;
+    color: black;
+    margin: 5px;
     
 }
 
@@ -461,6 +460,7 @@ p {
 
 .form-add-tricks {
     display: flex;
+    width: 50%;
     flex-direction: column;
     padding: 15px;
     border-radius: 20px;
@@ -518,8 +518,6 @@ p {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /*align-items: center;
-    flex-direction: column;*/
 }
 
 .bloc-media-tricks {
@@ -587,10 +585,6 @@ p {
     height: auto;
 }
 
-/******style bloc add comment*******/
-
-
-
 /*** style update form*****/
 
 .bloc-btn-new-add {
@@ -626,23 +620,6 @@ p {
 
 .form-forget button {
     margin-top: 10px;
-}
-
-/*****style flash msg******/
-.msg-flash {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    z-index: 20;
-    position: absolute;
-    width: 70%;
-    top: 60px;
-}
-
-.msg-flash a {
-    width: 100%;
-    z-index: 20;
 }
 
 .bloc-btn-media {
