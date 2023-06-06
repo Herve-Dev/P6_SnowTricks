@@ -195,7 +195,7 @@ class TricksController extends AbstractController
         //On récupère le contenu de la requête
         $data = json_decode($request->getContent(), true);
 
-        if ($this->isCsrfTokenValid('delete' . $mediaTrick->getId(), $data['_token'])) {
+        if ($this->isCsrfTokenValid(sprintf('delete%s', $mediaTrick->getId()), $data['_token'])) {
             // Le token csrf est valide 
             // On récupère le nom de l'image
             $mediaName = $mediaTrick->getMediaName();
@@ -223,7 +223,7 @@ class TricksController extends AbstractController
         //On récupère le contenu de la requête
         $data = json_decode($request->getContent(), true);
 
-        if ($this->isCsrfTokenValid('delete' . $videoTricks->getId(), $data['_token'])) {
+        if ($this->isCsrfTokenValid(sprintf('delete%d', $videoTricks->getId()), $data['_token'])) {
             // Le token csrf est valide 
 
             // On supprime la video de la base de données
