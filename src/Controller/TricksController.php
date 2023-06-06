@@ -65,27 +65,6 @@ class TricksController extends AbstractController
         ] );
     }
 
-    #[Route('/add/picture', name: 'add_picture_tricks', methods: ['POST'])]
-    public function addPicture(Request $request, PictureService $pictureService): JsonResponse
-    {
-        //On récupère le contenu de la requête
-        $data = json_decode($request->getContent(), true);
-
-        // On récupère le nom de l'image
-        /*$mediaName = $mediaTrick->setMediaName();*/
-
-        
-
-        /*if ($pictureService->add($mediaName, 'media_tricks', 300, 300)) {
-            // Si la requête est effectué on renvoie un code 200
-
-            return new JsonResponse(['success' => true], 200);
-        }*/
-
-        //La supréssion a échoué*/
-        return new JsonResponse(['message' => $data], 200);
-    }
-
     #[Route('/addTricks', name: 'add_new_tricks')]
     public function addTricks(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
