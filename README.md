@@ -30,7 +30,11 @@ la page de présentation d’une figure (contenant l’espace de discussion comm
 
 # Installation
 1- Copier le projet via git clone
+
 2- Configurer votre fichier .env.local en décommentant (DATABASE_URL="mysql") et ajouter les infos de votre bdd 
-3- Un petit Composer install sera de la partie pour les bibliotèques tierce installé 
+
+3- Un petit Composer install sera de la partie pour les bibliotèques tierce installé  
+
 4- Penser à ajouter les données (butters,grabs,spins,flips) à la table category (Vous pouvez le faire manuellement dans votre bdd)
+
 5- Profiter du site snowtricks
