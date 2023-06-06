@@ -238,7 +238,7 @@ class TricksController extends AbstractController
     }
 
     #[Route('/deleteTricks/{id}', name: 'delete_tricks')]
-    public function deleteTricks(TricksRepository $tricksRepository,EntityManagerInterface $entityManager, int $id, PictureService $pictureService)
+    public function deleteTricks(TricksRepository $tricksRepository,EntityManagerInterface $entityManager, int $id, PictureService $pictureService): Response
     {
 
         $tricks = $tricksRepository->find($id);

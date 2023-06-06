@@ -66,7 +66,7 @@ class CommentController extends AbstractController
         }
 
         //Fonction envoyer au js si user connecté
-        function userConnected($user)
+        function userConnected($user): array
         {
             $userConnected = [
                 'isConnected' => false,

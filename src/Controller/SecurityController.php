@@ -43,7 +43,7 @@ class SecurityController extends AbstractController
         UserRepository $userRepository ,
         SendMailService $mail, 
         Request $request, 
-        EncryptService $encrypt)
+        EncryptService $encrypt): Response
     {
         //On crée le formulaire
         $resetForm = $this->createForm(ResetPasswordType::class);
@@ -81,7 +81,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/resetPassword/{token}', name: 'app_reset_password')]
-    public function resetPassword(string $token, Request $request, UserRepository $userRepository,EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, EncryptService $encrypt)
+    public function resetPassword(string $token, Request $request, UserRepository $userRepository,EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, EncryptService $encrypt): Response
     {
 
         //On décode la data

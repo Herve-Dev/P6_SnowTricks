@@ -16,7 +16,7 @@ class PictureService
         $this->params = $params;
     }
 
-    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250): string
     {
         // On donne un nouveau nom à l'image 
         $file = md5(uniqid(rand(), true)) . '.webp';
@@ -87,7 +87,7 @@ class PictureService
         return $file;
     }
 
-    public function delete(string $file, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    public function delete(string $file, ?string $folder = '', ?int $width = 250, ?int $height = 250): bool
     {
         if ($file !== 'default.webp') {
             $success = false;
