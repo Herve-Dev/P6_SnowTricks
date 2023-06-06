@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\CommentFormType;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -66,7 +67,7 @@ class CommentController extends AbstractController
         }
 
         //Fonction envoyer au js si user connecté
-        function userConnected($user): array
+        function userConnected(?User $user): array
         {
             $userConnected = [
                 'isConnected' => false,
