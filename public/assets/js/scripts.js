@@ -1,1 +1,0 @@
-UIkit.alert(element, options);

@@ -72,7 +72,6 @@ class SecurityController extends AbstractController
                     $context
                 );
             }
-            $this->addFlash('danger', 'Un problème est survenu');
         }
 
 

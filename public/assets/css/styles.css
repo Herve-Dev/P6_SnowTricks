@@ -222,7 +222,9 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 91vh;
+    height: 100%;
+    background: rgb(57,140,207);
+    background: radial-gradient(circle, rgba(57,140,207,0.5551470588235294) 28%, rgba(255,255,255,0.4515056022408963) 100%);
 }
 
 .form-auth {
@@ -231,9 +233,9 @@ nav {
     justify-content: space-around;
     align-items: center;
     width: 30%;
-    height: 50%;
     padding: 20px;
-    border: solid 3px blue;
+    border-radius: 20px;
+    background-color: white;
 }
 
 .bloc_update_image {

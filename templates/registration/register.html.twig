@@ -3,8 +3,15 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+    <nav class="uk-navbar-container uk-navbar-transparent uk-animation-slide-top-medium" uk-navbar id="main-top">
+        <div class="uk-navbar-right ">
+            <ul class="uk-navbar-nav">
+                <li><a class="uk-text-primary link-nav" href="/">Acceuil</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container-register-login">
-        {{ form_start(registrationForm ,{'attr': {'class': 'form-auth'}}) }}
+        {{ form_start(registrationForm ,{'attr': {'class': 'form-auth uk-animation-slide-right'}}) }}
             <h1>Inscription</h1>
             {{ form_row(registrationForm.username) }}
             {{ form_row(registrationForm.email) }}
