@@ -222,6 +222,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100%;
     background: rgb(57,140,207);
     background: radial-gradient(circle, rgba(57,140,207,0.5551470588235294) 28%, rgba(255,255,255,0.4515056022408963) 100%);

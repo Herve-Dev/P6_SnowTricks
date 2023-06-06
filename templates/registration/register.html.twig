@@ -11,6 +11,11 @@
         </div>
     </nav>
     <div class="container-register-login">
+        <div uk-alert class="notice-register">
+            <h3>Notice</h3>
+            <p>Le mot de passe doit contenir au moins 8 caractères, dont une lettre majuscule et un caractère spécial.</p>
+            <a class="uk-alert-close" uk-close></a>
+        </div>
         {{ form_start(registrationForm ,{'attr': {'class': 'form-auth uk-animation-slide-right'}}) }}
             <h1>Inscription</h1>
             {{ form_row(registrationForm.username) }}
@@ -19,7 +24,7 @@
             {{ form_row(registrationForm.agreeTerms) }}
 
             <a href="{{ path('app_login') }}">Vous avez déja un compte ?</a>
-            <button type="submit" class="uk-button uk-button-primary">S'inscrire</button>
+            <button type="submit" class="uk-button uk-button-primary btn-register">S'inscrire</button>
         {{ form_end(registrationForm) }}
     </div>
 
