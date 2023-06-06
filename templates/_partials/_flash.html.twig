@@ -2,7 +2,7 @@
     {% for message in messages %}
         <div class="uk-alert-{{ label }}">
             <a class="uk-alert-close" uk-close></a>
-            <p>{{ message|raw }}</p>
+            <p>{{ message|escape }}</p>
         </div>
     {% endfor %}
 {% endfor %}
