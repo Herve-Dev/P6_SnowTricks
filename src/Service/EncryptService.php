@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 use Symfony\Component\String\ByteString;
@@ -18,13 +19,13 @@ class EncryptService
     public function decodeDataWithSignature(string $encodedData, string $secretKey): string
     {
         $decodedData = base64_decode(str_pad(strtr($encodedData, '-_', '+/'), strlen($encodedData) % 4, '=', STR_PAD_RIGHT));
-        $dataWithTimestamp = substr($decodedData, 0, -32); 
+        $dataWithTimestamp = substr($decodedData, 0, -32);
         $signature = substr($decodedData, -32);
 
         // Verify the signature
         $expectedSignature = hash_hmac('sha256', $dataWithTimestamp, $secretKey, true);
         if (!hash_equals($expectedSignature, $signature)) {
-           
+
             throw new \RuntimeException('Lien invalide');
         }
 

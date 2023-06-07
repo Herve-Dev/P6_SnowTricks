@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/forgetPassword', name: 'app_forget_password')]
+    #[Route(path: '/forgetPassword', name: 'app_forget_password', methods: ['POST'])]
     public function forgetPassword(
         UserRepository $userRepository ,
         SendMailService $mail, 
