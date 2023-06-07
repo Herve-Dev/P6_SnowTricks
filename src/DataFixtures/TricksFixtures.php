@@ -35,7 +35,7 @@ class TricksFixtures extends Fixture
             $tricks->setCategory($category);
 
             //On va chercher un id d'un user
-            $user = $this->getReference('usr-' . rand(1, 50));
+            $user = $this->getReference('usr-' . rand(1, 5));
             $tricks->setUser($user);
 
             $manager->persist($tricks);
