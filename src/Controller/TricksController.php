@@ -133,18 +133,18 @@ class TricksController extends AbstractController
     public function updateTricks(Tricks $tricks, Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
         //On crée le formulaire
-        $tricksForm = $this->createForm(TricksFormType::class, $tricks);
+        $tricksFormUpdate = $this->createForm(TricksFormType::class, $tricks);
 
         // On traite la requête du formulaire
-        $tricksForm->handleRequest($request);
+        $tricksFormUpdate->handleRequest($request);
 
         //On vérifie si le formulaire est soumis et valide
-        if ($tricksForm->isSubmitted() && $tricksForm->isValid()) {
+        if ($tricksFormUpdate->isSubmitted() && $tricksFormUpdate->isValid()) {
             //On récupère les images
-            $mediaTricks = $tricksForm->get('media_tricks')->getData();
+            $mediaTricks = $tricksFormUpdate->get('media_tricks')->getData();
 
             //On récupère les url video
-            $videoTricks = $tricksForm->get('video_tricks')->getData();
+            $videoTricks = $tricksFormUpdate->get('video_tricks')->getData();
 
             if ($videoTricks) {
                 foreach($videoTricks as $videoTrick) {
@@ -181,7 +181,7 @@ class TricksController extends AbstractController
         }
 
         return $this->render('tricks/update.html.twig', [
-            'tricksForm' => $tricksForm->createView(),
+            'tricksForm' => $tricksFormUpdate->createView(),
             'tricks' => $tricks
         ]);
     }
