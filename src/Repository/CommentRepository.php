@@ -88,7 +88,6 @@ class CommentRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
-//        ;
 //    }
 
 //    public function findOneBySomeField($value): ?Comment
@@ -98,6 +97,5 @@ class CommentRepository extends ServiceEntityRepository
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
-//        ;
 //    }
 }

@@ -51,7 +51,6 @@ class CategoryRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
-//        ;
 //    }
 
 //    public function findOneBySomeField($value): ?Category
@@ -61,6 +60,5 @@ class CategoryRepository extends ServiceEntityRepository
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
-//        ;
 //    }
 }

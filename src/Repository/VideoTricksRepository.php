@@ -51,7 +51,6 @@ class VideoTricksRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
-//        ;
 //    }
 
 //    public function findOneBySomeField($value): ?VideoTricks
@@ -61,6 +60,5 @@ class VideoTricksRepository extends ServiceEntityRepository
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
-//        ;
 //    }
 }

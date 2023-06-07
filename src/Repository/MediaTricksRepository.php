@@ -51,7 +51,6 @@ class MediaTricksRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
-//        ;
 //    }
 
 //    public function findOneBySomeField($value): ?MediaTricks
@@ -61,6 +60,5 @@ class MediaTricksRepository extends ServiceEntityRepository
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
-//        ;
 //    }
 }
