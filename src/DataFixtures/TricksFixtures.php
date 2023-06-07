@@ -33,6 +33,7 @@ class TricksFixtures extends Fixture
             //On va chercher une référence de catégorie
             $category = $this->getReference('cat-' . rand(1, 4));
             $tricks->setCategory($category);
+            $manager->persist($tricks);
         }
 
         $manager->flush();
