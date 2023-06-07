@@ -10,6 +10,8 @@ use Faker;
 
 class UserFixtures extends Fixture
 {
+    private $counter = 1;
+
     public function __construct(private UserPasswordHasherInterface $passwordEncoder){}
     
     public function load(ObjectManager $manager): void
@@ -27,6 +29,9 @@ class UserFixtures extends Fixture
             );
 
             $manager->persist($user);
+
+            $this->addReference('usr-' . $this->counter, $user);
+            $this->counter++;
         }
 
         $manager->flush();
