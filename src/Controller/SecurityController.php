@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/forgetPassword', name: 'app_forget_password', methods: ['POST'])]
+    #[Route(path: '/forgetPassword', name: 'app_forget_password')]
     public function forgetPassword(
         UserRepository $userRepository ,
         SendMailService $mail, 
@@ -76,7 +76,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/resetPassword/{token}', name: 'app_reset_password', methods: ['GET'])]
+    #[Route(path: '/resetPassword/{token}', name: 'app_reset_password')]
     public function resetPassword(string $token, Request $request, UserRepository $userRepository,EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, EncryptService $encrypt): Response
     {
 
@@ -112,7 +112,7 @@ class SecurityController extends AbstractController
         }
     }
 
-    #[Route(path: '/logout', name: 'app_logout', methods: ['POST'])]
+    #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
