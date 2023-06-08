@@ -76,7 +76,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/resetPassword/{token}', name: 'app_reset_password')]
+    #[Route(path: '/resetPassword/{token}', name: 'app_reset_password', methods: ['GET'])]
     public function resetPassword(string $token, Request $request, UserRepository $userRepository,EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, EncryptService $encrypt): Response
     {
 
@@ -112,7 +112,7 @@ class SecurityController extends AbstractController
         }
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/logout', name: 'app_logout', methods: ['POST'])]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');

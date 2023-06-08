@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/comment', name: 'comment')]
 class CommentController extends AbstractController
 {
-    #[Route('/', name: 'read_comment')]
+    #[Route('/', name: 'read_comment', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('comment/index.html.twig', [

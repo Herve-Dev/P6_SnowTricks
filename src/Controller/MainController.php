@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'main')]
+    #[Route('/', name: 'main', methods: ['GET'])]
     public function index(TricksRepository $tricksRepository): Response
     {
         // On recupère toute les données pour l'injecter à la vue

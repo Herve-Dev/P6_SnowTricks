@@ -235,7 +235,7 @@ class TricksController extends AbstractController
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 
-    #[Route('/deleteTricks/{id}', name: 'delete_tricks')]
+    #[Route('/deleteTricks/{id}', name: 'delete_tricks', methods: ['POST'])]
     public function deleteTricks(TricksRepository $tricksRepository, EntityManagerInterface $entityManager, int $id, PictureService $pictureService): Response
     {
 
