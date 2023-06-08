@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
 {
-    #[Route('/', name: 'all_tricks', methods: ['GET'])]
+    #[Route('/', name: 'all_tricks')]
     public function index(TricksRepository $tricksRepository): Response
     {
         // On recupère toute les données pour l'injecter à la vue
@@ -235,7 +235,7 @@ class TricksController extends AbstractController
         return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 
-    #[Route('/deleteTricks/{id}', name: 'delete_tricks', methods: ['POST'])]
+    #[Route('/deleteTricks/{id}', name: 'delete_tricks')]
     public function deleteTricks(TricksRepository $tricksRepository, EntityManagerInterface $entityManager, int $id, PictureService $pictureService): Response
     {
 
