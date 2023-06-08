@@ -2,7 +2,7 @@
 
 Développez de A à Z le site communautaire SnowTricks
 
-https://insight.symfony.com/projects/3d78783a-627a-4df2-9f5f-75663c6b59f5/big.svg
+![Capture](https://insight.symfony.com/projects/3d78783a-627a-4df2-9f5f-75663c6b59f5/big.svg)
 
 ![Capture](https://user-images.githubusercontent.com/82519929/231784652-a02d0840-8fba-4341-be8f-84dc1379b650.PNG)
 
