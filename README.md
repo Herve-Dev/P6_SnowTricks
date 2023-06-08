@@ -35,6 +35,10 @@ la page de présentation d’une figure (contenant l’espace de discussion comm
 
 3- Un petit Composer install sera de la partie pour les bibliotèques tierce installé  
 
-4- Penser à ajouter les données (butters,grabs,spins,flips) à la table category (Vous pouvez le faire manuellement dans votre bdd)
+4- faite un "symfony console doctrine:database:create" apres avoir rentré les infos de votre BDD (consigne 3)
 
-5- Profiter du site snowtricks
+5- faite ensuite un "symfony console doctrine:migration:migrate" pour creer les tables 
+
+6- et pour finir toujours dans votre terminal un "symfony console doctrine:fixtures:load --no-interaction" pour générer un jeux de donnée
+
+7- Profiter du site snowtricks
