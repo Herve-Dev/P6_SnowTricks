@@ -18,7 +18,7 @@ class MediaTricksFixtures extends Fixture implements DependentFixtureInterface
         for ($medTrk=1; $medTrk < 50; $medTrk++) { 
             $mediaTricks = new MediaTricks();
             $mediaTricks->setMediaName($faker->image(null, 640, 480));
-            $tricks = $this->getReference('trk-' . rand(1, 50));
+            $tricks = $this->getReference('trk-' . rand(1, 10));
             $mediaTricks->setTricks($tricks);
             
             $manager->persist($mediaTricks);
