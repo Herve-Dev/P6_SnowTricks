@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Tricks;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 
-class TricksFixtures extends Fixture
+class TricksFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -35,12 +36,19 @@ class TricksFixtures extends Fixture
             $tricks->setCategory($category);
 
             //On va chercher un id d'un user
-            $user = $this->getReference('usr-' . $trk);
+            $user = $this->getReference('usr-' . rand(1, 5));
             $tricks->setUser($user);
 
             $manager->persist($tricks);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }

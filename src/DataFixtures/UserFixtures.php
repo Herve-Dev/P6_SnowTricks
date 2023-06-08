@@ -30,7 +30,7 @@ class UserFixtures extends Fixture
 
             $manager->persist($user);
 
-            $this->addReference('usr-' . $usr, $user);
+            $this->addReference('usr-' . $this->counter, $user);
             $this->counter++;
         }
 
