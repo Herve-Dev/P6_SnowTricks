@@ -10,6 +10,9 @@ use Faker;
 
 class TricksFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    private $counter = 1;
+
     public function load(ObjectManager $manager): void
     {
         $tricksArrayName = [
@@ -40,6 +43,9 @@ class TricksFixtures extends Fixture implements DependentFixtureInterface
             $tricks->setUser($user);
 
             $manager->persist($tricks);
+
+            $this->addReference('trk-' . $this->counter, $tricks);
+            $this->counter++;
         }
 
         $manager->flush();
