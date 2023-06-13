@@ -2,25 +2,26 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\MediaTricks;
-use App\Entity\Tricks;
-use App\Entity\VideoTricks;
-use App\Form\CommentFormType;
-use App\Form\TricksFormType;
-use App\Repository\CommentRepository;
-use App\Repository\TricksRepository;
-use App\Service\PictureService;
-use DateTimeImmutable;
 use DateTimeZone;
+use App\Entity\Tricks;
+use DateTimeImmutable;
+use App\Entity\Comment;
+use Cocur\Slugify\Slugify;
+use App\Entity\MediaTricks;
+use App\Entity\VideoTricks;
+use App\Form\TricksFormType;
+use App\Form\CommentFormType;
+use App\Service\PictureService;
+use App\Repository\TricksRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
@@ -33,11 +34,11 @@ class TricksController extends AbstractController
         return $this->render('tricks/index.html.twig', compact('tricks'));
     }
 
-    #[Route('/readTricks/{id}', name: 'read_tricks')]
-    public function readTricks(TricksRepository $tricksRepository, int $id, Request $request, EntityManagerInterface $em, CommentRepository $commentRepository): Response
+    #[Route('/details/{slug}', name: 'read_tricks')]
+    public function readTricks(TricksRepository $tricksRepository, string $slug, Request $request, EntityManagerInterface $em, CommentRepository $commentRepository): Response
     {
         // On recupère toute le tricks selon son id pour l'injecter à la vue
-        $tricksSelected = $tricksRepository->findOneBy(['id' => $id]);
+        $tricksSelected = $tricksRepository->findOneBy(['tricks_slug' => $slug]);
 
         $comment = new Comment();
         $commentForm = $this->createForm(CommentFormType::class, $comment);
@@ -56,7 +57,7 @@ class TricksController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('tricks_read_tricks', ['id' => $tricksSelected->getId()]);
+            return $this->redirectToRoute('tricks_read_tricks', ['slug' => $tricksSelected->getTricksSlug()]);
         }
 
         return $this->render('tricks/read.html.twig', [
@@ -65,7 +66,7 @@ class TricksController extends AbstractController
         ]);
     }
 
-    #[Route('/addTricks', name: 'add_new_tricks')]
+    #[Route('/ajout_nouveau_tricks', name: 'add_new_tricks')]
     public function addTricks(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
         //On crée un "nouveau tricks"
@@ -85,6 +86,16 @@ class TricksController extends AbstractController
         if ($tricksForm->isSubmitted() && $tricksForm->isValid()) {
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
+
+            // On récupère le titre
+            $tricksTitle = $tricksForm->get('tricks_name')->getData();
+
+            // Générer le slug à partir du titre
+            $slugify = new Slugify();
+            $slug = $slugify->slugify($tricksTitle);
+
+            // Définir le slug dans l'entité Tricks
+            $tricks->setTricksSlug($slug);
 
             //On récupère les url video
             $videoTricks = $tricksForm->get('video_tricks')->getData();
@@ -129,7 +140,7 @@ class TricksController extends AbstractController
         ]);
     }
 
-    #[Route('/updateTricks/{id}', name: 'update_tricks')]
+    #[Route('/modification/{slug}/{id}', name: 'update_tricks')]
     public function updateTricks(Tricks $tricks, Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
         //On crée le formulaire
@@ -145,6 +156,17 @@ class TricksController extends AbstractController
 
             //On récupère les url video
             $videoTricks = $tricksFormUpdate->get('video_tricks')->getData();
+
+            // On récupère le titre
+            $tricksTitle = $tricksFormUpdate->get('tricks_name')->getData();
+
+            // Générer le slug à partir du titre
+            $slugify = new Slugify();
+            $slug = $slugify->slugify($tricksTitle);
+
+            // Définir le slug dans l'entité Tricks
+            $tricks->setTricksSlug($slug);
+
 
             if ($videoTricks) {
                 foreach($videoTricks as $videoTrick) {

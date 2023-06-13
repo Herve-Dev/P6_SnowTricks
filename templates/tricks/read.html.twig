@@ -23,7 +23,7 @@
 								{% if app.user.id == tricksSelected.user.id %}
 									<div class="bloc-btn-media uk-overlay uk-light uk-position-top-right">
 										<div class="media-btn-upd">
-											<a href="{{ path('tricks_update_tricks', {id: tricksSelected.id}) }}" uk-icon="icon: pencil"></a>
+											<a href="{{ path('tricks_update_tricks', {slug: tricksSelected.tricksSlug ,id: tricksSelected.id}) }}" uk-icon="icon: pencil"></a>
 										</div>
 
 										<div class="media-btn-del">

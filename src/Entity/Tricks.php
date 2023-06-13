@@ -42,6 +42,9 @@ class Tricks
     #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: VideoTricks::class, orphanRemoval: true, cascade:['persist'])]
     private Collection $VideoTricks;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tricks_slug = null;
+
     public function __construct()
     {
         $this->MediaTricks = new ArrayCollection();
@@ -201,6 +204,18 @@ class Tricks
                 $videoTrick->setTricks(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTricksSlug(): ?string
+    {
+        return $this->tricks_slug;
+    }
+
+    public function setTricksSlug(?string $tricks_slug): static
+    {
+        $this->tricks_slug = $tricks_slug;
 
         return $this;
     }

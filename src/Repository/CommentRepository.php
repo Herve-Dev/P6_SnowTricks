@@ -76,6 +76,17 @@ class CommentRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function searchCommentWithSlug(string $slug): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.tricks', 't')
+            ->andWhere('t.tricks_slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('c.comment_created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
