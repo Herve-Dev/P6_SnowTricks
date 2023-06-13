@@ -2,25 +2,26 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\MediaTricks;
-use App\Entity\Tricks;
-use App\Entity\VideoTricks;
-use App\Form\CommentFormType;
-use App\Form\TricksFormType;
-use App\Repository\CommentRepository;
-use App\Repository\TricksRepository;
-use App\Service\PictureService;
-use DateTimeImmutable;
 use DateTimeZone;
+use App\Entity\Tricks;
+use DateTimeImmutable;
+use App\Entity\Comment;
+use Cocur\Slugify\Slugify;
+use App\Entity\MediaTricks;
+use App\Entity\VideoTricks;
+use App\Form\TricksFormType;
+use App\Form\CommentFormType;
+use App\Service\PictureService;
+use App\Repository\TricksRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/tricks', name: 'tricks_')]
 class TricksController extends AbstractController
@@ -85,6 +86,16 @@ class TricksController extends AbstractController
         if ($tricksForm->isSubmitted() && $tricksForm->isValid()) {
             //On récupère les images
             $mediaTricks = $tricksForm->get('media_tricks')->getData();
+
+            // On récupère le titre
+            $tricksTitle = $tricksForm->get('tricks_name')->getData();
+
+            // Générer le slug à partir du titre
+            $slugify = new Slugify();
+            $slug = $slugify->slugify($tricksTitle);
+
+            // Définir le slug dans l'entité Tricks
+            $tricks->setTricksSlug($slug);
 
             //On récupère les url video
             $videoTricks = $tricksForm->get('video_tricks')->getData();
