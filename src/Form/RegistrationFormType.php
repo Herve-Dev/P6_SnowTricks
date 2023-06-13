@@ -35,10 +35,11 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'uk-chackbox'
                 ],
+                'label' => 'Vous devez accepter nos conditions',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter nos conditions.',
                     ]),
                 ],
             ])

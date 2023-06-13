@@ -7,15 +7,16 @@ let currentURL = window.location.href
 //On enleve le slash 
 let segments = currentURL.split("/");
 
-//On récupere le dernier parametre (en logique id du tricks)
-var idTricks = segments[segments.length - 1];
+//On récupere le dernier parametre (en logique id du tricks ou le slug)
+let slugTricks = segments[segments.length - 1];
+
 
 //On prépare une variable pour lui passer id de l'user récupéré
 let idUserConnected = null;
 
 //On prépare les données qui seront envoyer à la route pour PHP 
 let data = {
-  idTricks: parseInt(idTricks) ,
+  slug: slugTricks ,
 }
 
 //Fonction option pour fetch
@@ -47,7 +48,7 @@ fetch('/comment/api/paginate', getDataComment)
   
   const comments = data.data
   
-  const itemsPerPage = 2; // Nombre d'éléments à afficher par page
+  const itemsPerPage = 10; // Nombre d'éléments à afficher par page
 
 // Fonction pour afficher les commentaires d'une page spécifique
 function displayComments(pageNumber) {
@@ -133,8 +134,6 @@ function generateCommentHTML(username, date, comment, isConnected, idUserConnect
           <p class="paragraph-comment-${idComment}">${comment}</p>
       </div>
     </div>`;
-
-    console.log(date);
 
     if(isConnected && idUserConnected === commentIdUser) {
       htmlGenerateWithData += `
