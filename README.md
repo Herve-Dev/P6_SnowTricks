@@ -33,7 +33,7 @@ la page de présentation d’une figure (contenant l’espace de discussion comm
 # Installation
 1- Copier le projet via git clone
 
-2- Configurer votre fichier .env.local en décommentant (DATABASE_URL="mysql") et ajouter les infos de votre bdd 
+2- Créer votre fichier .env.local (à la racine du projet) décommenter (DATABASE_URL="mysql") et ajouter les infos de votre bdd 
 
 3- Un petit Composer install sera de la partie pour les bibliotèques tierce installé  
 
